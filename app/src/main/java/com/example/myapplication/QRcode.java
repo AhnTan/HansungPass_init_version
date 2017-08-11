@@ -1,0 +1,357 @@
+package com.example.myapplication;
+
+
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class QRcode extends AppCompatActivity {
+    String host = "223.194.134.161";    // 서버 컴퓨터 IP
+    //String host = "121.161.183.214";
+    int port = 5001;
+    Handler mHandler;
+    Handler timerHandler;
+    Handler stopHandler;
+    Bundle bundle;
+    Bundle timerbundle;
+    ConnectThread thread;
+    TimerThread thread2;
+    pauestimer thread3;
+    WebView imgv ;
+    static int k = 9000;
+
+    long now;
+    Date date;
+    SimpleDateFormat sdfNow;
+    String formatDate;
+    String url;
+    String md5;
+    TextView dateNow;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_qrcode);
+
+        Intent clockview = new Intent(getApplicationContext(), ClockView.class);
+        startActivity(clockview);
+
+
+        Intent getfinger = getIntent();
+        String qrurl = getfinger.getStringExtra("finger");
+        WebView qrview = (WebView)findViewById(R.id.qr_qrcode_img);
+        qrview.loadUrl(qrurl);
+
+
+        thread = new ConnectThread();
+        thread.start();
+
+
+        // 현재시간을 msec 으로 구한다.
+        now = System.currentTimeMillis();
+        // 현재시간을 date 변수에 저장한다.
+        date = new Date(now);
+        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+        sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        // nowDate 변수에 값을 저장한다.
+        formatDate = sdfNow.format(date);
+
+        dateNow = (TextView) findViewById(R.id.qr_date);
+        dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
+
+
+
+        //서버에서 받은 QR코드 url을 핸들러를 통해 웹뷰에 붙여줌
+        mHandler = new Handler(){
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                bundle = msg.getData();
+
+                imgv = (WebView)findViewById(R.id.qr_qrcode_img);
+                //Uri uri = Uri.parse(s);
+                String qrcode = bundle.getString("key");
+
+                imgv.loadUrl(qrcode);
+
+                imgv.setVisibility(View.VISIBLE);
+
+                String[] ReturnList = qrcode.split("%3B%3B");
+                url = ReturnList[0] + "%3B%3B";
+                md5 = ReturnList[1];
+                Log.d("aa", url);
+                Log.d("bb", md5);
+
+
+                //Toast.makeText(getApplicationContext(), bundle.getString("key") , Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        stopHandler = new Handler(){
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                bundle = msg.getData();
+
+                imgv = (WebView)findViewById(R.id.qr_qrcode_img);
+                //Uri uri = Uri.parse(s);
+                String ss = bundle.getString("key");
+
+                imgv.setVisibility(View.INVISIBLE);
+
+
+                //Toast.makeText(getApplicationContext(), bundle.getString("key") , Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        // 시간초 나오게하는 핸들러
+        timerHandler = new Handler(){
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                timerbundle = msg.getData();
+
+                TextView timev = (TextView)findViewById(R.id.qr_timer_t);
+                TextView timev2 = (TextView)findViewById(R.id.qr_timer_t2);
+                //Uri uri = Uri.parse(s);
+                String timess = timerbundle.getString("timer");
+                //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
+
+
+                timev.setText(timess);
+                timev2.setText(timess);
+
+                if(timess.equals("2000")){
+                    ImageButton ibtn = (ImageButton)findViewById(R.id.qr_time);
+                    ibtn.setVisibility(View.VISIBLE);
+                    timev.setVisibility(View.INVISIBLE);
+                }
+
+                //Toast.makeText(getApplicationContext(), timerbundle.getString("timer") , Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        //설정버튼
+        Button btn2 = (Button)findViewById(R.id.qr_setting_btn);
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(),Setting.class);
+                startActivity(intent);
+
+            }
+        });
+
+        thread3 = new pauestimer();
+        thread3.start();
+        thread2 = new TimerThread();
+        thread2.start();
+
+    }
+
+    public class MyAsyncTask extends AsyncTask<Void, Void, Void>{
+        //doInbackground 메소드가 실행되기전 실행되는 메소드이다. 비동기 처리전에 무엇인가 처리를 하고 싶다면 사용
+        protected void onPreExecute() {
+
+        }
+
+        // 처리하고 싶은 내용
+        protected Void doInBackground(Void... params){
+
+
+            return null;
+        }
+
+        // 비동기 처리의 진행 상황을 진행률로 표시하고 싶을 때 등 에서 사용, 백그라운드에 호출되는 경우 처리된다.
+        protected void onProgressUpdate() {
+
+        }
+
+        // doInBackground 메소드 후에 실행되는 마지막 메소드이다. 백그라운드 메소드의 반환값을 인자로 받아 그결과를 화면에 반영 할 수 있다.
+        protected void onPostExecute() {
+
+        }
+    }
+
+    // 새로운 QR코드를 받고싶을때 버튼 이벤트
+    public void onButtonClicked(View v){
+
+        k=0;
+        // 현재시간을 msec 으로 구한다.
+        now = System.currentTimeMillis();
+        // 현재시간을 date 변수에 저장한다.
+        date = new Date(now);
+        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+        sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        // nowDate 변수에 값을 저장한다.
+        formatDate = sdfNow.format(date);
+        dateNow = (TextView) findViewById(R.id.qr_date);
+        dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
+
+
+        TextView timev = (TextView)findViewById(R.id.qr_timer_t);
+        ImageButton ibtn = (ImageButton)findViewById(R.id.qr_time);
+        ibtn.setVisibility(View.INVISIBLE);
+        timev.setVisibility(View.VISIBLE);
+
+        k=9000;
+        thread = new ConnectThread();
+        thread.start();
+        thread2 = new TimerThread();
+        thread2.start();
+    }
+
+    class pauestimer extends Thread{
+        public void run(){
+            try{
+                Thread.sleep(3000);
+            }
+            catch (Exception e){
+                    e.printStackTrace();
+            }
+        }
+    }
+
+    class TimerThread extends Thread{
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
+
+        // Button btn = (Button)findViewById(R.id.qr_time);
+
+        public void run(){
+            // 프로그래스바 (위와 동일)
+
+            for(; k>=0; k--){
+                progressBar.setProgress(k);
+
+                Bundle tbundle = new Bundle();
+                tbundle.putString("timer", Integer.toString(k));
+                Message timermsg = new Message();
+                timermsg.setData(tbundle);
+                timerHandler.sendMessage(timermsg);
+
+
+                try{
+                    Thread.sleep(1);
+                }
+
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+            Bundle stopbundle = new Bundle();
+            stopbundle.putString("timer", "ee");
+            Message stopmsg = new Message();
+            stopmsg.setData(stopbundle);
+            stopHandler.sendMessage(stopmsg);
+
+            //ibtn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    // 쓰레드 (서버연결 및 프로그래스바) - 현재는 임시로 한 쓰레드에 그냥 넣어둠
+    class ConnectThread extends Thread{
+        //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
+        public void run(){
+            //String host = "172.30.1.32";
+            //String host = "223.194.158.91";
+            String host = "113.198.81.69";
+            //String host = "223.194.134.161";
+            int port = 5002;
+            //String host = "172.30.1.53";
+            //int port = 8080;
+
+
+            try {
+                Socket socket = new Socket(host, port);
+                System.out.println("서버로 연결되었습니다. : " + host + ", " + port);
+                //Toast.makeText(MainActivity.this, "connect server : " + host + ", " + port , Toast.LENGTH_SHORT).show();
+
+                //String output = m_etSendData.getText().toString();
+                String output = "send";
+                ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
+                outstream.writeObject(output);
+                outstream.flush();
+                System.out.println("서버로 보낸 데이터 : " + output);
+                //Toast.makeText(MainActivity.this, "서버로 보낸 데이터 : " + output , Toast.LENGTH_SHORT).show();
+
+                String output2 = "send2";
+                ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
+                outstream2.writeObject(output);
+                outstream2.flush();
+                System.out.println("서버로 보낸 데이터 : " + output2);
+
+                ObjectInputStream instream = new ObjectInputStream(socket.getInputStream());
+                //Bitmap bitmap = (Bitmap)instream.readObject();
+                Object input = instream.readObject();
+                //System.out.println(instream.readObject());
+                System.out.println("서버로부터 받은 데이터: " + input);
+                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
+
+                /*
+                String s = input.toString();
+                WebView imgv = (WebView)findViewById(R.id.img);
+                //Uri uri = Uri.parse(s);
+                //imgv.loadUrl(s);
+                */
+
+                // 서버에서 받은 데이터(QR코드)를 번들을 통해 핸들러 메세지로 전달
+                Bundle bundle = new Bundle();
+                bundle.putString("key", input.toString());
+                Message msg = new Message();
+                msg.setData(bundle);
+                mHandler.sendMessage(msg);
+
+                /*
+                // 프로그래스바 (위와 동일)
+                for(int k=0; k<=3000; k++){
+                    progressBar.setProgress(k);
+
+                    Bundle tbundle = new Bundle();
+                    tbundle.putString("timer", Integer.toString(k));
+                    Message timermsg = new Message();
+                    timermsg.setData(tbundle);
+                    timerHandler.sendMessage(timermsg);
+
+
+                    //Message timermsg = timerHandler.obtainMessage();
+                    //timermsg.arg1 = k;
+
+
+                    try{
+                        Thread.sleep(1);
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                    }
+                }
+                */
+                instream.close();
+                outstream.close();
+                socket.close();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("접근실패");
+            }
+        }
+    }
+
+
+}

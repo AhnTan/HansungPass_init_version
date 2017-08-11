@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/rc_logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@android:drawable/menuitem_background"
+            android:elevation="0dp"
+            android:text="로그아웃"
+            android:textColor="@android:color/black"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="30dp"
+        android:text="본인 확인을 위해 종합정보시스템 패스워드를 입력해주세요." />
+
+    <EditText
+        android:id="@+id/rc_pw_et"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="비밀번호(Password)"
+        android:textColor="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/rc_login_btn"
+        android:layout_width="210dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Login"
+        android:textColor="@android:color/background_light" />
+
+</LinearLayout>

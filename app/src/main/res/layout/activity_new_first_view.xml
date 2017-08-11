@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/nfv_logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@android:drawable/menuitem_background"
+            android:elevation="0dp"
+            android:text="로그아웃"
+            android:textColor="@android:color/black"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/nfv_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@android:drawable/menuitem_background"
+            android:text="설정"
+            android:textColor="@android:color/black" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:gravity="bottom|center_horizontal"
+        android:paddingBottom="30dp"
+        android:text="등록된 학생증이 없습니다." />
+
+    <Button
+        android:id="@+id/nfv_register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="등록하기"
+        android:textColor="@android:color/black" />
+</LinearLayout>

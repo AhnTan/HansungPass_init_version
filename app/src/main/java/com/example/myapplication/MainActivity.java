@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     String host = "223.194.158.91";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
     int port = 5001;
-//yyyyyy
+//yyyyyyjjjj
     FirstConnectThread thread;
     Bundle bundle;
     Handler mHandler;

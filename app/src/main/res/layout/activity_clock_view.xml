@@ -8,7 +8,7 @@
     >
 
     <!-- 타이틀바 -->
-    //소린..//
+    //소린
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

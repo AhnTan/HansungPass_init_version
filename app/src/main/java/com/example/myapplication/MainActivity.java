@@ -65,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
             //String host = "localhost";
-            String host = "223.194.158.91";
+            //String host = "223.194.158.91";
             //String host = "223.194.134.161";
             //int port = 5001;
-            //String host = "172.30.1.53";
+            String host = "172.30.1.53";
             //int port = 8080;
 
             try {

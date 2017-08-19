@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -165,29 +164,6 @@ public class QRcode extends AppCompatActivity {
 
     }
 
-    public class MyAsyncTask extends AsyncTask<Void, Void, Void>{
-        //doInbackground 메소드가 실행되기전 실행되는 메소드이다. 비동기 처리전에 무엇인가 처리를 하고 싶다면 사용
-        protected void onPreExecute() {
-
-        }
-
-        // 처리하고 싶은 내용
-        protected Void doInBackground(Void... params){
-
-
-            return null;
-        }
-
-        // 비동기 처리의 진행 상황을 진행률로 표시하고 싶을 때 등 에서 사용, 백그라운드에 호출되는 경우 처리된다.
-        protected void onProgressUpdate() {
-
-        }
-
-        // doInBackground 메소드 후에 실행되는 마지막 메소드이다. 백그라운드 메소드의 반환값을 인자로 받아 그결과를 화면에 반영 할 수 있다.
-        protected void onPostExecute() {
-
-        }
-    }
 
     // 새로운 QR코드를 받고싶을때 버튼 이벤트
     public void onButtonClicked(View v){
@@ -268,11 +244,11 @@ public class QRcode extends AppCompatActivity {
     class ConnectThread extends Thread{
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
-            //String host = "172.30.1.32";
+            String host = "172.30.1.53";
             //String host = "223.194.158.91";
-            String host = "113.198.81.69";
+            //String host = "113.198.81.69";
             //String host = "223.194.134.161";
-            int port = 5002;
+            int port = 5001;
             //String host = "172.30.1.53";
             //int port = 8080;
 

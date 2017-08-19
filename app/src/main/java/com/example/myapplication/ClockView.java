@@ -49,6 +49,9 @@ public class ClockView extends Activity {
         thread2.start();
     }
 
+    protected void onStop(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+    }
 
     class TimerThread extends Thread{
         int t;

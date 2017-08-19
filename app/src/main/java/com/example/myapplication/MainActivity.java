@@ -113,13 +113,6 @@ public class MainActivity extends AppCompatActivity {
                     msg.setData(bundle);
                     mHandler.sendMessage(msg);
                 }
-                // 서버에서 받은 데이터(QR코드)를 번들을 통해 핸들러 메세지로 전달
-               // Bundle bundle = new Bundle();
-                //bundle.putString("key", input.toString());
-                //Message msg = new Message();
-                //msg.setData(bundle);
-                //mHandler.sendMessage(msg);
-
 
                 instream.close();
                 outstream.close();

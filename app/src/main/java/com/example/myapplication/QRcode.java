@@ -279,12 +279,6 @@ public class QRcode extends AppCompatActivity {
                 System.out.println("서버로부터 받은 데이터: " + input);
                 //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
 
-                /*
-                String s = input.toString();
-                WebView imgv = (WebView)findViewById(R.id.img);
-                //Uri uri = Uri.parse(s);
-                //imgv.loadUrl(s);
-                */
 
                 // 서버에서 받은 데이터(QR코드)를 번들을 통해 핸들러 메세지로 전달
                 Bundle bundle = new Bundle();
@@ -293,30 +287,7 @@ public class QRcode extends AppCompatActivity {
                 msg.setData(bundle);
                 mHandler.sendMessage(msg);
 
-                /*
-                // 프로그래스바 (위와 동일)
-                for(int k=0; k<=3000; k++){
-                    progressBar.setProgress(k);
 
-                    Bundle tbundle = new Bundle();
-                    tbundle.putString("timer", Integer.toString(k));
-                    Message timermsg = new Message();
-                    timermsg.setData(tbundle);
-                    timerHandler.sendMessage(timermsg);
-
-
-                    //Message timermsg = timerHandler.obtainMessage();
-                    //timermsg.arg1 = k;
-
-
-                    try{
-                        Thread.sleep(1);
-                    }
-                    catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
-                */
                 instream.close();
                 outstream.close();
                 socket.close();

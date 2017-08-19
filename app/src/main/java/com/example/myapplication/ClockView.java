@@ -79,7 +79,7 @@ public class ClockView extends Activity {
         }
     }
 
-    //확인 버튼 클릭 , 액티비티 닫기
+    //확인 버튼 클릭 ,  액티비티 닫기
     public void mOnClose(View v){
         finish();
     }

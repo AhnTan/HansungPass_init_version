@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -145,17 +144,7 @@ public class QRcode extends AppCompatActivity {
             }
         };
 
-        //설정버튼
-        Button btn2 = (Button)findViewById(R.id.qr_setting_btn);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Intent intent = new Intent(getApplicationContext(),Setting.class);
-                startActivity(intent);
-
-            }
-        });
 
         thread3 = new pauestimer();
         thread3.start();

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="7dp">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -11,23 +12,25 @@
 
         <Button
             android:id="@+id/nfv_logout_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/logout" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:background="@android:drawable/menuitem_background"
-            android:elevation="0dp"
-            android:text="로그아웃"
-            android:textColor="@android:color/black"
-            android:visibility="visible" />
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="HansungPass"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/nfv_setting_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="@android:drawable/menuitem_background"
-            android:text="설정"
-            android:textColor="@android:color/black" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/setting" />
+
     </FrameLayout>
 
     <TextView

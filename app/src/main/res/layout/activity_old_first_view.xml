@@ -4,43 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    >
+    android:padding="7dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/ofv_logout_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/logout" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃" />
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="HansungPass"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/ofv_setting_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="설정" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/setting" />
     </FrameLayout>
 
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.1"
-        >
+       >
 
         <Button
             android:id="@+id/ofv_load_btn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="150dp"
             android:text="학생증 불러오기"
             android:textSize="20dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="100dp"
+            app:srcCompat="@drawable/logo" />
 
     </FrameLayout>
 

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,9 +78,9 @@ public class Setting extends AppCompatActivity {
                 data.add(new SearchMenuItem(R.drawable.a));
                 data.add(new SearchMenuItem(R.drawable.a));
 */
-                data.add(new Setting_item("잠금방식", "패턴,지문,얼굴"));
+                data.add(new Setting_item("잠금방식", "지문,얼굴"));
                 data.add(new Setting_item("지문 인식", "등록된 지문이 있습니다"));
-                data.add(new Setting_item("패턴 방식", "등록된 패턴이 없습니다"));
+                data.add(new Setting_item("얼굴 방식", "등록된 얼굴이 없습니다"));
                 data.add(new Setting_item("설정4", "설정4은 다음과 같습니다"));
                 data.add(new Setting_item("설정5", "설정5은 다음과 같습니다"));
                 data.add(new Setting_item("설정6", "설정6은 다음과 같습니다"));
@@ -117,33 +119,33 @@ public class Setting extends AppCompatActivity {
                     // 클릭이 되었을 때 넘어오는 패러미터 중 position이라는 이름을 가진 int타입의 변수는
                     // 리스트뷰에서 몇번째 아이템이 클릭되었는지 숫자로 나타냄
 
-                    /*
-                    Intent intent = new Intent(getApplicationContext(), SearchFoodMenuList.class);
+
+                    Intent intent;
 
                     switch (position) {
 
+                        //잠금방식
                         case 0: // position의 값이 0일 경우 = 맨 처음꺼
                             // 인텐트에 값을 실어 보냄
-                            intent.putExtra("MenuSelect", "0");
+
+                             intent = new Intent(getApplicationContext(), SetLockActivity.class);
                             startActivity(intent);
                             break;
+                        //지문인식
                         case 1:
-                            intent.putExtra("MenuSelect", "1");
+                            intent = new Intent(getApplicationContext(), SetFPActivity.class);
                             startActivity(intent);
                             break;
+                        //패턴방식
                         case 2:
-                            intent.putExtra("MenuSelect", "2");
-                            startActivity(intent);
+                            Toast.makeText(getApplicationContext(), "아직 구현하지 않음", Toast.LENGTH_SHORT).show();
                             break;
-                        case 3:
-                            intent.putExtra("MenuSelect", "3");
-                            startActivity(intent);
-                            break;
-                        default: //position의 값이 위에서 지정한 case에 하나도 맞지 않을경우
+                        //position의 값이 위에서 지정한 case에 하나도 맞지 않을경우
+                        default:
                             //실행코드
                             break;
                     }
-*/
+
                 }
             });
         }

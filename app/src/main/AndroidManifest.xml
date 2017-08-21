@@ -31,7 +31,11 @@
         <activity android:name=".Setting" />
         <activity android:name=".finger" />
         <activity android:name=".QRcode" />
-        <activity android:name=".ClockView" android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ClockView"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".SetFPActivity" />
+        <activity android:name=".SetLockActivity"></activity>
     </application>
 
 </manifest>

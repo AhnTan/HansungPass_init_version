@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -42,7 +41,6 @@ public class finger extends AppCompatActivity {
 
         intent = new Intent(getApplicationContext(), QRcode.class);
         intent.putExtra("pid", pid);
-        Log.d("NewFirstView", pid);
 
 
         mHandler = new Handler(){

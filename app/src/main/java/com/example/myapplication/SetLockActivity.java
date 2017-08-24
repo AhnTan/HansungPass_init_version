@@ -21,12 +21,8 @@ public class SetLockActivity extends AppCompatActivity {
 /*     패턴할때 짰던코드
        final ToggleButton FPtb=(ToggleButton)findViewById(R.id.FPtb);
        final ToggleButton PTtb=(ToggleButton)findViewById(R.id.PTtb);
-
         final Switch FPsb = (Switch)findViewById(R.id.switch1);
-
-
         FPtb.setChecked(true);
-
         FPtb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

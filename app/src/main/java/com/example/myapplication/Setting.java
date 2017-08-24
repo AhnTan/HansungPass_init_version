@@ -59,11 +59,9 @@ public class Setting extends AppCompatActivity {
                 data.add(new SearchMenuItem("http://postfiles3.naver.net/MjAxNzA3MDlfMTgz/MDAxNDk5NTk2MDQzNTY4.dcqXJ2l082zDIAwWcY8wW8YqvW2j2doV3k-Ydgdr7Lkg.pGBZhhjqO6EIr5qsVZQZOCAyhxHNsvZOsBMQo3Quu58g.JPEG.h7678036/b.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles1.naver.net/MjAxNzA3MDlfOTgg/MDAxNDk5NTk2MDI4NDU4.EORNoqQdI72ZfxlMaewg5mtoLm6iEZeU0QnXDRiQO_Mg.9SO9F8yBL3Uf_ZHnFWPChscvJR8Prx68RVhoIqd6mI0g.JPEG.h7678036/a.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles13.naver.net/MjAxNzA3MDlfMjEg/MDAxNDk5NTk2ODM2ODI4.XBzWfFiMfGO77qYMbM6dLYknW-1vG_v2mmD2Pf8YU44g.hfhytFkOypfSyplaUAapOKzb86wVSqpDIa61MEQjmgcg.JPEG.h7678036/c.jpg?type=w2"));
-
                 data.add(new SearchMenuItem("http://postfiles3.naver.net/MjAxNzA3MDlfMTgz/MDAxNDk5NTk2MDQzNTY4.dcqXJ2l082zDIAwWcY8wW8YqvW2j2doV3k-Ydgdr7Lkg.pGBZhhjqO6EIr5qsVZQZOCAyhxHNsvZOsBMQo3Quu58g.JPEG.h7678036/b.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles1.naver.net/MjAxNzA3MDlfOTgg/MDAxNDk5NTk2MDI4NDU4.EORNoqQdI72ZfxlMaewg5mtoLm6iEZeU0QnXDRiQO_Mg.9SO9F8yBL3Uf_ZHnFWPChscvJR8Prx68RVhoIqd6mI0g.JPEG.h7678036/a.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles13.naver.net/MjAxNzA3MDlfMjEg/MDAxNDk5NTk2ODM2ODI4.XBzWfFiMfGO77qYMbM6dLYknW-1vG_v2mmD2Pf8YU44g.hfhytFkOypfSyplaUAapOKzb86wVSqpDIa61MEQjmgcg.JPEG.h7678036/c.jpg?type=w2"));
-
                 data.add(new SearchMenuItem("http://postfiles3.naver.net/MjAxNzA3MDlfMTgz/MDAxNDk5NTk2MDQzNTY4.dcqXJ2l082zDIAwWcY8wW8YqvW2j2doV3k-Ydgdr7Lkg.pGBZhhjqO6EIr5qsVZQZOCAyhxHNsvZOsBMQo3Quu58g.JPEG.h7678036/b.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles1.naver.net/MjAxNzA3MDlfOTgg/MDAxNDk5NTk2MDI4NDU4.EORNoqQdI72ZfxlMaewg5mtoLm6iEZeU0QnXDRiQO_Mg.9SO9F8yBL3Uf_ZHnFWPChscvJR8Prx68RVhoIqd6mI0g.JPEG.h7678036/a.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles13.naver.net/MjAxNzA3MDlfMjEg/MDAxNDk5NTk2ODM2ODI4.XBzWfFiMfGO77qYMbM6dLYknW-1vG_v2mmD2Pf8YU44g.hfhytFkOypfSyplaUAapOKzb86wVSqpDIa61MEQjmgcg.JPEG.h7678036/c.jpg?type=w2"));
@@ -128,7 +126,7 @@ public class Setting extends AppCompatActivity {
                         case 0: // position의 값이 0일 경우 = 맨 처음꺼
                             // 인텐트에 값을 실어 보냄
 
-                             intent = new Intent(getApplicationContext(), SetLockActivity.class);
+                            intent = new Intent(getApplicationContext(), SetLockActivity.class);
                             startActivity(intent);
                             break;
                         //지문인식

@@ -7,7 +7,7 @@
     >
 
     <!-- 타이틀바 -->
-    //소린
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -27,14 +27,13 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:id="@+id/clock"
-           android:layout_gravity="center"
+            android:layout_gravity="center"
             android:textColor="#000000"
             android:textSize="100dp"/>
     </LinearLayout>
 
 
     <!-- //end 타이틀바
-
     <fragment
         android:id="@+id/clock"
         android:layout_width="match_parent"

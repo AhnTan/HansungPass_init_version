@@ -25,6 +25,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+
     repositories {
         maven { url "https://jitpack.io" }
     }
@@ -34,6 +35,7 @@ dependencies {
     // optional: the RxJava 1 interface
     // optional: the RxJava 2 interface
     compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.google.zxing:core:2.0'
     compile 'com.github.ajalt.reprint:core:3.1.0@aar'
     compile 'com.github.ajalt.reprint:reprint_spass:3.1.0@aar'
     compile 'com.github.ajalt.reprint:rxjava:3.1.0@aar'

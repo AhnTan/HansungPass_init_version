@@ -8,20 +8,19 @@ import android.widget.Button;
 
 public class NewFirstView extends AppCompatActivity {
 
-    private Button btn;
-    private Button btn2;
-    private Intent intent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_first_view);
 
-        btn = (Button)findViewById(R.id.nfv_register_btn);
+        Button btn = (Button)findViewById(R.id.nfv_register_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getApplicationContext(),OldFirstView.class);
+                Intent mainintent = getIntent();
+                String pid = mainintent.getStringExtra("pid");
+                Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
+                intent.putExtra("pid", pid);
                 startActivity(intent);
             }
         });
@@ -29,11 +28,11 @@ public class NewFirstView extends AppCompatActivity {
 
 
         //설정버튼
-        btn2 = (Button)findViewById(R.id.nfv_setting_btn);
+        Button btn2 = (Button)findViewById(R.id.nfv_setting_btn);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(getApplicationContext(),Setting.class);
+                Intent intent = new Intent(getApplicationContext(),Setting.class);
                 startActivity(intent);
             }
         });

@@ -13,9 +13,9 @@ import com.github.ajalt.reprint.core.AuthenticationListener;
 import com.github.ajalt.reprint.core.Reprint;
 
 public class finger extends AppCompatActivity {
-    private ImageView img;
-    private Handler mHandler;
-    private Bundle bundle;
+    ImageView img;
+    Handler mHandler;
+    Bundle bundle;
     /*
     String host = "223.194.158.91";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
@@ -23,7 +23,7 @@ public class finger extends AppCompatActivity {
     */
     //ConnectThread fingerthread;
     //Object input;
-    private Intent intent;
+    Intent intent;
 
 
     @Override
@@ -37,8 +37,13 @@ public class finger extends AppCompatActivity {
 
         //fingerthread = new ConnectThread();
         //fingerthread.start();
+        Intent beforeintent = getIntent();
+        String pid = beforeintent.getStringExtra("pid");
 
         intent = new Intent(getApplicationContext(), QRcode.class);
+        intent.putExtra("pid", pid);
+
+
 
         mHandler = new Handler(){
             public void handleMessage(Message msg){

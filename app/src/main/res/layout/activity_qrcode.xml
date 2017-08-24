@@ -4,8 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="7dp"
     >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/qr_logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃" />
+
+        <Button
+            android:id="@+id/qr_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="설정" />
+    </FrameLayout>
 
 
     <LinearLayout
@@ -110,7 +130,7 @@
                     android:text="2017.06.19 16:02:32"
                     android:textSize="20dp" />
 
-                <WebView
+                <ImageView
                     android:id="@+id/qr_qrcode_img"
                     android:layout_width="170dp"
                     android:layout_height="170dp"
@@ -134,34 +154,34 @@
                     android:layout_weight="1"
                     android:progress="0"
                     android:max="9000" />
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/qr_relative"
-    android:layout_weight="2"
-    android:layout_gravity="center">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/qr_relative"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="10"
-        android:textSize="30dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/qr_timer_t"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:textSize="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/qr_timer_t"
 
-        />
+                        />
 
-    <ImageButton
-        android:id="@+id/qr_time"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:src="@drawable/success"
-        android:onClick="onButtonClicked"
-        android:visibility="invisible"/>
+                    <ImageButton
+                        android:id="@+id/qr_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/success"
+                        android:onClick="onButtonClicked"
+                        android:visibility="invisible"/>
 
-</RelativeLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 

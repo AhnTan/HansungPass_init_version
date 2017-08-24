@@ -34,8 +34,7 @@
         <activity
             android:name=".ClockView"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".SetFPActivity" />
-        <activity android:name=".SetLockActivity"></activity>
+        <activity android:name=".testActivity"></activity>
     </application>
 
 </manifest>

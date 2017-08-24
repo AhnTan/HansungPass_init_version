@@ -11,9 +11,9 @@ import android.view.Window;
 import android.widget.TextView;
 
 public class ClockView extends Activity {
-    Handler timerHandler;
-    Bundle timerbundle;
-    TimerThread thread2;
+    private Handler timerHandler;
+    private Bundle timerbundle;
+    private TimerThread thread2;
     static int b = 3000;
 
     @Override
@@ -56,6 +56,7 @@ public class ClockView extends Activity {
     class TimerThread extends Thread{
         int t;
         public void run(){
+            b=3000;
             // 프로그래스바 (위와 동일)
             for(; b>=0; b--){
 

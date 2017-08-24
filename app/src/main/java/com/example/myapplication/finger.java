@@ -13,9 +13,9 @@ import com.github.ajalt.reprint.core.AuthenticationListener;
 import com.github.ajalt.reprint.core.Reprint;
 
 public class finger extends AppCompatActivity {
-    ImageView img;
-    Handler mHandler;
-    Bundle bundle;
+    private ImageView img;
+    private Handler mHandler;
+    private Bundle bundle;
     /*
     String host = "223.194.158.91";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
@@ -23,7 +23,7 @@ public class finger extends AppCompatActivity {
     */
     //ConnectThread fingerthread;
     //Object input;
-    Intent intent;
+    private Intent intent;
 
 
     @Override

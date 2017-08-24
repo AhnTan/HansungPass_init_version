@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class Setting extends AppCompatActivity {
 
-    ArrayList<Setting_item> data;
-    ListView lv;
+    private ArrayList<Setting_item> data;
+    private ListView lv;
     static Setting_adapter adapter;
 
     @Override

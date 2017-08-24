@@ -8,7 +8,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,39 +25,48 @@ public class QRcode extends AppCompatActivity {
     String host = "223.194.134.161";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
     int port = 5001;
-    Handler mHandler;
-    Handler timerHandler;
-    Handler stopHandler;
-    Bundle bundle;
-    Bundle timerbundle;
-    ConnectThread thread;
-    TimerThread thread2;
-    pauestimer thread3;
-    WebView imgv ;
+    private Handler mHandler;
+    private Handler timerHandler;
+    private Handler stopHandler;
+    private Bundle bundle;
+    private Bundle timerbundle;
+    private ConnectThread thread;
+    private TimerThread thread2;
+    private pauestimer thread3;
+    private WebView imgv ;
     static int k = 9000;
-
-    long now;
-    Date date;
-    SimpleDateFormat sdfNow;
-    String formatDate;
-    String url;
-    String md5;
-    TextView dateNow;
-
+    private long now;
+    private Date date;
+    private SimpleDateFormat sdfNow;
+    private String formatDate;
+    private String url;
+    private String md5;
+    private TextView dateNow;
+    private Intent clockview;
+    private Intent getfinger;
+    private String qrurl;
+    private WebView qrview;
+    private TextView timev;
+    private TextView timev2;
+    private String[] ReturnList;
+    private ImageButton ibtn;
+    private Button btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
+        //스샷막아주는 코드
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
-        Intent clockview = new Intent(getApplicationContext(), ClockView.class);
+        clockview = new Intent(getApplicationContext(), ClockView.class);
         startActivity(clockview);
 
 
-        Intent getfinger = getIntent();
-        String qrurl = getfinger.getStringExtra("finger");
-        WebView qrview = (WebView)findViewById(R.id.qr_qrcode_img);
+        getfinger = getIntent();
+        qrurl = getfinger.getStringExtra("finger");
+        qrview = (WebView)findViewById(R.id.qr_qrcode_img);
         qrview.loadUrl(qrurl);
 
 
@@ -75,8 +86,9 @@ public class QRcode extends AppCompatActivity {
         dateNow = (TextView) findViewById(R.id.qr_date);
         dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
 
-
-
+        timev = (TextView)findViewById(R.id.qr_timer_t);
+        timev2 = (TextView)findViewById(R.id.qr_timer_t2);
+        ibtn = (ImageButton)findViewById(R.id.qr_time);
         //서버에서 받은 QR코드 url을 핸들러를 통해 웹뷰에 붙여줌
         mHandler = new Handler(){
             public void handleMessage(Message msg){
@@ -91,7 +103,7 @@ public class QRcode extends AppCompatActivity {
 
                 imgv.setVisibility(View.VISIBLE);
 
-                String[] ReturnList = qrcode.split("%3B%3B");
+                ReturnList = qrcode.split("%3B%3B");
                 url = ReturnList[0] + "%3B%3B";
                 md5 = ReturnList[1];
                 Log.d("aa", url);
@@ -123,21 +135,19 @@ public class QRcode extends AppCompatActivity {
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 timerbundle = msg.getData();
-
-                TextView timev = (TextView)findViewById(R.id.qr_timer_t);
-                TextView timev2 = (TextView)findViewById(R.id.qr_timer_t2);
                 //Uri uri = Uri.parse(s);
-                String timess = timerbundle.getString("timer");
+                int timess = timerbundle.getInt("timer");
                 //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
+                timev.setText(Integer.toString(timess));
+                timev2.setText(Integer.toString(timess));
 
-
-                timev.setText(timess);
-                timev2.setText(timess);
-
-                if(timess.equals("2000")){
-                    ImageButton ibtn = (ImageButton)findViewById(R.id.qr_time);
-                    ibtn.setVisibility(View.VISIBLE);
+                if(timess < 2000){
                     timev.setVisibility(View.INVISIBLE);
+                    ibtn.setVisibility(View.VISIBLE);
+                }
+                else{
+                    timev.setVisibility(View.VISIBLE);
+                    ibtn.setVisibility(View.INVISIBLE);
                 }
 
                 //Toast.makeText(getApplicationContext(), timerbundle.getString("timer") , Toast.LENGTH_SHORT).show();
@@ -145,14 +155,24 @@ public class QRcode extends AppCompatActivity {
         };
 
 
-
         thread3 = new pauestimer();
+        thread3.setDaemon(true);
         thread3.start();
         thread2 = new TimerThread();
+        thread2.setDaemon(true);
         thread2.start();
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //thread.interrupt();
+        //thread2.interrupt();
+        startActivity(intent);
+        super.onBackPressed();
+    }
 
     // 새로운 QR코드를 받고싶을때 버튼 이벤트
     public void onButtonClicked(View v){
@@ -170,12 +190,12 @@ public class QRcode extends AppCompatActivity {
         dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
 
 
-        TextView timev = (TextView)findViewById(R.id.qr_timer_t);
-        ImageButton ibtn = (ImageButton)findViewById(R.id.qr_time);
+        timev = (TextView)findViewById(R.id.qr_timer_t);
+        ibtn = (ImageButton)findViewById(R.id.qr_time);
         ibtn.setVisibility(View.INVISIBLE);
         timev.setVisibility(View.VISIBLE);
 
-        k=9000;
+
         thread = new ConnectThread();
         thread.start();
         thread2 = new TimerThread();
@@ -201,11 +221,13 @@ public class QRcode extends AppCompatActivity {
         public void run(){
             // 프로그래스바 (위와 동일)
 
+            k=9000;
+
             for(; k>=0; k--){
                 progressBar.setProgress(k);
 
                 Bundle tbundle = new Bundle();
-                tbundle.putString("timer", Integer.toString(k));
+                tbundle.putInt("timer", k);
                 Message timermsg = new Message();
                 timermsg.setData(tbundle);
                 timerHandler.sendMessage(timermsg);
@@ -237,7 +259,7 @@ public class QRcode extends AppCompatActivity {
             //String host = "223.194.158.91";
             //String host = "113.198.81.69";
             //String host = "223.194.134.161";
-            int port = 5001;
+            int port = 5002;
             //String host = "172.30.1.53";
             //int port = 8080;
 

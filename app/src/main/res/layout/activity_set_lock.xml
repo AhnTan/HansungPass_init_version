@@ -16,8 +16,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="282dp"
-        app:srcCompat="@drawable/exp" />
+        android:layout_height="282dp" />
 
     <Switch
         android:id="@+id/FPsb"

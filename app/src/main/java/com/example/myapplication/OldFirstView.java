@@ -8,27 +8,31 @@ import android.widget.Button;
 
 public class OldFirstView extends AppCompatActivity {
 
+    private Button btn;
+    private Button btn2;
+    private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_first_view);
 
-        Button btn = (Button)findViewById(R.id.ofv_load_btn);
+        btn = (Button)findViewById(R.id.ofv_load_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),finger.class);
+                intent = new Intent(getApplicationContext(),finger.class);
                 startActivity(intent);
             }
         });
 
 
         //설정버튼
-        Button btn2 = (Button)findViewById(R.id.ofv_setting_btn);
+        btn2 = (Button)findViewById(R.id.ofv_setting_btn);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Setting.class);
+                intent = new Intent(getApplicationContext(),Setting.class);
                 startActivity(intent);
             }
         });

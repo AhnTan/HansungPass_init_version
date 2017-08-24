@@ -16,24 +16,24 @@ import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
     String host = "223.194.158.91";    // 서버 컴퓨터 IP
-    //String host = "121.161.183.214";
     int port = 5001;
-//yyyyyyjjjjhhhhhjjjjj
-    FirstConnectThread thread;
-    Bundle bundle;
-    Handler mHandler;
+    private FirstConnectThread thread;
+    private Bundle bundle;
+    private Handler mHandler;
+    private Button btn;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn = (Button)findViewById(R.id.login_btn);
+        btn = (Button)findViewById(R.id.login_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             String id = "허가";
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                intent = new Intent(getApplicationContext(),NewFirstView.class);
                 startActivity(intent);
                 //thread = new FirstConnectThread();
                 //thread.start();
@@ -99,13 +99,11 @@ public class MainActivity extends AppCompatActivity {
                 //System.out.println(instream.readObject());
                 System.out.println("서버로부터 받은 데이터: " + input);
                 //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
-
                 // 서버에서 허가를 받으면 다음 화면으로
                 if(input.toString().equals("허가")){
-                    Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                    intent = new Intent(getApplicationContext(),NewFirstView.class);
                     startActivity(intent);
                 }
-
                 else if(input.toString().equals("불허가")){
                     bundle = new Bundle();
                     bundle.putString("key", "ID와 PW를 다시 확인해주세요");
@@ -113,11 +111,9 @@ public class MainActivity extends AppCompatActivity {
                     msg.setData(bundle);
                     mHandler.sendMessage(msg);
                 }
-
                 instream.close();
                 outstream.close();
                 socket.close();
-
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -125,7 +121,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
 }

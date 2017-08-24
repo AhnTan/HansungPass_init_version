@@ -36,10 +36,13 @@ public class QRcode extends AppCompatActivity {
     private Handler stopHandler;
     private Bundle bundle;
     private Bundle timerbundle;
+    private Bundle tbundle;
+    private Bundle stopbundle;
     private ConnectThread thread;
     private TimerThread thread2;
     private pauestimer thread3;
-    static int k = 9000;
+    private Message timermsg;
+    private Message stopmsg;
     private long now;
     private Date date;
     private SimpleDateFormat sdfNow;
@@ -47,9 +50,7 @@ public class QRcode extends AppCompatActivity {
     private String url;
     private String md5;
     private TextView dateNow;
-    private Intent clockview;
-    private Intent getfinger;
-    private String qrurl;
+    static int k=9000;
     private TextView timev;
     private TextView timev2;
     private String[] ReturnList;
@@ -188,8 +189,8 @@ public class QRcode extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //thread.interrupt();
-        //thread2.interrupt();
+        thread3.interrupt();
+        thread2.interrupt();
         startActivity(intent);
         super.onBackPressed();
     }
@@ -238,37 +239,37 @@ public class QRcode extends AppCompatActivity {
 
         // Button btn = (Button)findViewById(R.id.qr_time);
 
-        public void run(){
+        public void run() {
             // 프로그래스바 (위와 동일)
+            try {
+                k = 9000;
 
-            k=9000;
-
-            for(; k>=0; k--){
-                progressBar.setProgress(k);
-
-                Bundle tbundle = new Bundle();
-                tbundle.putInt("timer", k);
-                Message timermsg = new Message();
-                timermsg.setData(tbundle);
-                timerHandler.sendMessage(timermsg);
-
-
-                try{
-                    Thread.sleep(1);
+                for (; k >= 0; k--) {
+                    progressBar.setProgress(k);
+                    tbundle = new Bundle();
+                    tbundle.putInt("timer", k);
+                    timermsg = new Message();
+                    timermsg.setData(tbundle);
+                    timerHandler.sendMessage(timermsg);
+                    try {
+                        Thread.sleep(1);
+                    } catch (Exception e) {
+                        return;
+                    }
                 }
+                stopbundle = new Bundle();
+                stopbundle.putString("timer", "ee");
+                stopmsg = new Message();
+                stopmsg.setData(stopbundle);
+                stopHandler.sendMessage(stopmsg);
 
-                catch(Exception e){
-                    e.printStackTrace();
-                }
+                //ibtn.setVisibility(View.VISIBLE);
             }
-            Bundle stopbundle = new Bundle();
-            stopbundle.putString("timer", "ee");
-            Message stopmsg = new Message();
-            stopmsg.setData(stopbundle);
-            stopHandler.sendMessage(stopmsg);
-
-            //ibtn.setVisibility(View.VISIBLE);
+            catch (Exception e) {
+                return;
+            }
         }
+
     }
 
     // 쓰레드 (서버연결 및 프로그래스바) - 현재는 임시로 한 쓰레드에 그냥 넣어둠

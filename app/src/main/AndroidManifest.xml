@@ -34,7 +34,8 @@
         <activity
             android:name=".ClockView"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".testActivity"></activity>
+        <activity android:name=".SetPatternActivity" />
+        <activity android:name=".ConfirmPatternActivity"></activity>
     </application>
 
 </manifest>

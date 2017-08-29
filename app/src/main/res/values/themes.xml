@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="PreferenceFixTheme.Light.DarkActionBar">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="colorPrimary">#ff263238</item>
+        <item name="colorPrimaryDark">#ff21272b</item>
+        <item name="colorControlNormal">@color/material_blue_grey_800</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="preferenceCategory_marginBottom">0dp</item>
+        <item name="patternViewStyle">@style/PatternView.Light</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="PreferenceFixTheme">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="preferenceCategory_marginBottom">0dp</item>
+        <item name="patternViewStyle">@style/PatternView</item>
+    </style>
+</resources>

@@ -36,11 +36,11 @@ public class finger extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        Intent beforeintent = getIntent();
-        String pid = beforeintent.getStringExtra("pid");
+        //Intent beforeintent = getIntent();
+        //String pid = beforeintent.getStringExtra("pid");
 
         intent = new Intent(getApplicationContext(), QRcode.class);
-        intent.putExtra("pid", pid);
+        //intent.putExtra("pid", pid);
 
 
         mHandler = new Handler(){
@@ -155,7 +155,7 @@ public class finger extends AppCompatActivity {
         boolean fingerprintFlag = Reprint.isHardwarePresent();
         boolean hasRegisteredFlag = Reprint.hasFingerprintRegistered();
         if(hasRegisteredFlag)
-            img.setImageResource(R.drawable.success);
+            img.setImageResource(R.drawable.twice);
         else
             img.setImageResource(R.drawable.failure);
 

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     String formatDate;
     TextView dateNow;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
             String id = "허가";
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
-                startActivity(intent);
-                //thread = new FirstConnectThread();
-                //thread.start();
+                //Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                //startActivity(intent);
+                thread = new FirstConnectThread();
+                thread.start();
                 /*
                 Log.d("kkk", "아 왜안돼");
                 */
@@ -84,12 +86,14 @@ public class MainActivity extends AppCompatActivity {
         Object input;
         String output_id;
         String output_pw;
+        SharedPreferences id_pref;
+        SharedPreferences.Editor id_commit;
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
             //String host = "localhost";
             //String host = "223.194.158.91";
             //String host = "223.194.134.161";
-            String host = "223.194.154.228";
+            String host = "223.194.156.124";
             //int port = 5001;
             //String host = "172.30.1.53";
             //int port = 8080;
@@ -134,7 +138,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if(input.toString().equals("허가")){
                     Intent intent = new Intent(getApplicationContext(), NewFirstView.class);
-                    intent.putExtra("pid", id.getText().toString());
+                    //intent.putExtra("pid", id.getText().toString());
+                    String pid = id.getText().toString();
+                    id_pref = getSharedPreferences("login", MODE_APPEND);
+                    id_commit = id_pref.edit();
+                    id_commit.putString("id", pid);
+                    id_commit.commit();
+                    System.out.println(">>>>>>>>>>>>>>>> : " + id_pref.getString("id", ""));
                     startActivity(intent);
                 }
 

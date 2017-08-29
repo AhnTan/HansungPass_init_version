@@ -23,10 +23,10 @@ public class NewFirstView extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainintent = getIntent();
-                String pid = mainintent.getStringExtra("pid");
+                //Intent mainintent = getIntent();
+                //String pid = mainintent.getStringExtra("pid");
                 Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
-                intent.putExtra("pid", pid);
+                //intent.putExtra("pid", pid);
                 startActivity(intent);
             }
         });

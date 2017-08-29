@@ -120,6 +120,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
+                android:background="#FFF923"
                 >
 
                 <TextView
@@ -131,9 +132,10 @@
                     android:textSize="20dp" />
 
                 <ImageView
+
                     android:id="@+id/qr_qrcode_img"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_gravity="center" />
 
             </LinearLayout>

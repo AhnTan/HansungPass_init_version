@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,27 +37,31 @@ public class QRcode extends AppCompatActivity {
     private Handler stopHandler;
     private Bundle bundle;
     private Bundle timerbundle;
-    private Bundle tbundle;
-    private Bundle stopbundle;
     private ConnectThread thread;
     private TimerThread thread2;
     private pauestimer thread3;
-    private Message timermsg;
-    private Message stopmsg;
+    static int k = 9000;
     private long now;
     private Date date;
     private SimpleDateFormat sdfNow;
     private String formatDate;
-    private String url;
+    private String qr_id;
+    private String qr_date;
     private String md5;
     private TextView dateNow;
-    static int k=9000;
+    private Intent clockview;
+    private Intent getfinger;
+    private String qrurl;
     private TextView timev;
     private TextView timev2;
     private String[] ReturnList;
     private ImageButton ibtn;
     private String pid;
     private Button btn2;
+    MainActivity.FirstConnectThread ma ;
+    SharedPreferences se;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,7 @@ public class QRcode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
+        //se = getSharedPreferences("id", 0);
         //스샷막아주는 코드
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
@@ -98,15 +104,15 @@ public class QRcode extends AppCompatActivity {
                 String ss = bundle.getString("key");
 
                 String[] ReturnList = ss.split("%3B%3B");
-                url = ReturnList[0] + "%3B%3B";
+                qr_id = ReturnList[0] + "%3B%3B";
                 md5 = ReturnList[1];
-                Log.d("aabbccdd", url);
+                Log.d("aabbccdd", qr_id);
                 Log.d("bbddee", md5);
 
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
                 try {
-                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(ss, BarcodeFormat.QR_CODE, 170, 170));
+                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(ss, BarcodeFormat.QR_CODE, 200, 200));
                     ImageView qr_code_view = (ImageView) findViewById(R.id.qr_qrcode_img);
                     qr_code_view.setImageBitmap(bitmap);
                     qr_code_view.setVisibility(View.VISIBLE);
@@ -189,8 +195,8 @@ public class QRcode extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        thread3.interrupt();
-        thread2.interrupt();
+        //thread.interrupt();
+        //thread2.interrupt();
         startActivity(intent);
         super.onBackPressed();
     }
@@ -239,37 +245,37 @@ public class QRcode extends AppCompatActivity {
 
         // Button btn = (Button)findViewById(R.id.qr_time);
 
-        public void run() {
+        public void run(){
             // 프로그래스바 (위와 동일)
-            try {
-                k = 9000;
 
-                for (; k >= 0; k--) {
-                    progressBar.setProgress(k);
-                    tbundle = new Bundle();
-                    tbundle.putInt("timer", k);
-                    timermsg = new Message();
-                    timermsg.setData(tbundle);
-                    timerHandler.sendMessage(timermsg);
-                    try {
-                        Thread.sleep(1);
-                    } catch (Exception e) {
-                        return;
-                    }
+            k=9000;
+
+            for(; k>=0; k--){
+                progressBar.setProgress(k);
+
+                Bundle tbundle = new Bundle();
+                tbundle.putInt("timer", k);
+                Message timermsg = new Message();
+                timermsg.setData(tbundle);
+                timerHandler.sendMessage(timermsg);
+
+
+                try{
+                    Thread.sleep(1);
                 }
-                stopbundle = new Bundle();
-                stopbundle.putString("timer", "ee");
-                stopmsg = new Message();
-                stopmsg.setData(stopbundle);
-                stopHandler.sendMessage(stopmsg);
 
-                //ibtn.setVisibility(View.VISIBLE);
+                catch(Exception e){
+                    e.printStackTrace();
+                }
             }
-            catch (Exception e) {
-                return;
-            }
+            Bundle stopbundle = new Bundle();
+            stopbundle.putString("timer", "ee");
+            Message stopmsg = new Message();
+            stopmsg.setData(stopbundle);
+            stopHandler.sendMessage(stopmsg);
+
+            //ibtn.setVisibility(View.VISIBLE);
         }
-
     }
 
     // 쓰레드 (서버연결 및 프로그래스바) - 현재는 임시로 한 쓰레드에 그냥 넣어둠
@@ -277,7 +283,7 @@ public class QRcode extends AppCompatActivity {
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
             //String host = "172.30.1.53";
-            String host = "223.194.154.228";
+            String host = "223.194.156.124";
             //String host = "223.194.158.91";
             //String host = "113.198.81.69";
             //String host = "223.194.134.161";
@@ -289,11 +295,17 @@ public class QRcode extends AppCompatActivity {
             try {
                 Socket socket = new Socket(host, port);
                 System.out.println("서버로 연결되었습니다. : " + host + ", " + port);
-                //Toast.makeText(MainActivity.this, "connect server : " + host + ", " + port , Toast.LENGTH_SHORT).show();
 
+                se = getSharedPreferences("login", MODE_APPEND);
+                String ppid = se.getString("id", "");
+                //ma.id_pref =getSharedPreferences("login", MODE_APPEND);
+                // String ppid = ma.id_pref.getString("id", "");
+                //String ppid = se.getString("login", "");
                 //String output = m_etSendData.getText().toString();
                 //String output = pid;
-                String output = pid + formatDate;
+                //String output = pid + formatDate;
+                System.out.println(">>>>>>>>>>>>>>>> : " + ppid);
+                String output = ppid + formatDate;
                 ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
                 outstream.writeObject(output);
                 outstream.flush();

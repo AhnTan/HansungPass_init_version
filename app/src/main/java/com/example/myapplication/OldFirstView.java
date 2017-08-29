@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import me.zhanghai.android.patternlock.*;
-
 public class OldFirstView extends AppCompatActivity {
 
     private Button btn;
@@ -23,15 +21,14 @@ public class OldFirstView extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent beforeintent = getIntent();
-                String pid = beforeintent.getStringExtra("pid");
-
                 Intent intent = new Intent(getApplicationContext(),finger.class);
-                intent.putExtra("pid", pid);
+                //intent.putExtra("pid", pid);
                 startActivity(intent);
             }
         });
 
+
+        //패턴버튼
         btn = (Button)findViewById(R.id.patternbutton);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,10 +1,7 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-
 import java.util.List;
-
 import me.zhanghai.android.patternlock.PatternView;
 import com.example.myapplication.util.ThemeUtils;
 import com.example.myapplication.util.PatternLockUtils;

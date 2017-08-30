@@ -38,23 +38,16 @@ public class Setting extends AppCompatActivity {
 
         Log.d("3", "3");
     }
-
-
     public class MyAsyncTask extends AsyncTask<ArrayList<Setting_item>, ArrayList<Setting_item>, ArrayList<Setting_item>> {
-
         //doInbackground 메소드가 실행되기전 실행되는 메소드이다. 비동기 처리전에 무엇인가 처리를 하고 싶다면 사용
         protected void onPreExecute() {
-
         }
-
         // 처리하고 싶은 내용
         protected ArrayList<Setting_item> doInBackground(ArrayList<Setting_item>... params) {
             Log.d("4", "4");
             data = params[0];
-
             try {
                 System.out.print("kkkkkkkkkk");
-
                 /*
                 data.add(new SearchMenuItem("http://postfiles3.naver.net/MjAxNzA3MDlfMTgz/MDAxNDk5NTk2MDQzNTY4.dcqXJ2l082zDIAwWcY8wW8YqvW2j2doV3k-Ydgdr7Lkg.pGBZhhjqO6EIr5qsVZQZOCAyhxHNsvZOsBMQo3Quu58g.JPEG.h7678036/b.jpg?type=w2"));
                 data.add(new SearchMenuItem("http://postfiles1.naver.net/MjAxNzA3MDlfOTgg/MDAxNDk5NTk2MDI4NDU4.EORNoqQdI72ZfxlMaewg5mtoLm6iEZeU0QnXDRiQO_Mg.9SO9F8yBL3Uf_ZHnFWPChscvJR8Prx68RVhoIqd6mI0g.JPEG.h7678036/a.jpg?type=w2"));
@@ -75,10 +68,10 @@ public class Setting extends AppCompatActivity {
                 data.add(new SearchMenuItem(R.drawable.a));
                 data.add(new SearchMenuItem(R.drawable.a));
                 data.add(new SearchMenuItem(R.drawable.a));
-*/
+                */
                 data.add(new Setting_item("잠금방식", "지문,얼굴"));
                 data.add(new Setting_item("지문 인식", "등록된 지문이 있습니다"));
-                data.add(new Setting_item("얼굴 방식", "등록된 얼굴이 없습니다"));
+                data.add(new Setting_item("패턴 방식", "등록된 패턴이 없습니다"));
                 data.add(new Setting_item("설정4", "설정4은 다음과 같습니다"));
                 data.add(new Setting_item("설정5", "설정5은 다음과 같습니다"));
                 data.add(new Setting_item("설정6", "설정6은 다음과 같습니다"));
@@ -116,16 +109,11 @@ public class Setting extends AppCompatActivity {
                     //리스트뷰의 아이템 (한 행)이 클릭된 경우를 처리
                     // 클릭이 되었을 때 넘어오는 패러미터 중 position이라는 이름을 가진 int타입의 변수는
                     // 리스트뷰에서 몇번째 아이템이 클릭되었는지 숫자로 나타냄
-
-
                     Intent intent;
-
                     switch (position) {
-
                         //잠금방식
-                        case 0: // position의 값이 0일 경우 = 맨 처음꺼
+                        case 0: // position의 값이 0일 경우 = 맨 처음꺼j
                             // 인텐트에 값을 실어 보냄
-
                             intent = new Intent(getApplicationContext(), SetLockActivity.class);
                             startActivity(intent);
                             break;
@@ -136,17 +124,16 @@ public class Setting extends AppCompatActivity {
                             break;
                         //패턴방식
                         case 2:
-                            Toast.makeText(getApplicationContext(), "아직 구현하지 않음", Toast.LENGTH_SHORT).show();
+                            intent = new Intent(getApplicationContext(), SetPatternActivity.class);
+                            startActivity(intent);
                             break;
                         //position의 값이 위에서 지정한 case에 하나도 맞지 않을경우
                         default:
                             //실행코드
                             break;
                     }
-
                 }
             });
         }
-
     }
 }

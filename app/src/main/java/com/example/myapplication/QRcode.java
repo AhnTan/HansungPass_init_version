@@ -58,10 +58,8 @@ public class QRcode extends AppCompatActivity {
     private ImageButton ibtn;
     private String pid;
     private Button btn2;
-    MainActivity.FirstConnectThread ma ;
-    SharedPreferences se;
-
-
+    private MainActivity.FirstConnectThread ma ;
+    private SharedPreferences se;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

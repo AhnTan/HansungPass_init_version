@@ -53,7 +53,6 @@ public class QRcode extends AppCompatActivity {
     private Intent getfinger;
     private String qrurl;
     private TextView timev;
-    private TextView timev2;
     private String[] ReturnList;
     private ImageButton ibtn;
     private String pid;
@@ -92,7 +91,6 @@ public class QRcode extends AppCompatActivity {
         dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
 
         timev = (TextView)findViewById(R.id.qr_timer_t);
-        timev2 = (TextView)findViewById(R.id.qr_timer_t2);
         ibtn = (ImageButton)findViewById(R.id.qr_time);
         //서버에서 받은 QR코드 url을 핸들러를 통해 웹뷰에 붙여줌
         mHandler = new Handler(){
@@ -153,7 +151,6 @@ public class QRcode extends AppCompatActivity {
                 int timess = timerbundle.getInt("timer");
                 //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
                 timev.setText(Integer.toString(timess));
-                timev2.setText(Integer.toString(timess));
 
                 if(timess < 2000){
                     timev.setVisibility(View.INVISIBLE);

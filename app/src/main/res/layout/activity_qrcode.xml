@@ -4,9 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="7dp"
     >
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/qr_logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃" />
+
+        <Button
+            android:id="@+id/qr_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="설정" />
+    </FrameLayout>
 
 
     <LinearLayout
@@ -28,31 +47,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="440dp"
-            android:layout_margin="20dp"
-            android:layout_weight="0.36"
             android:background="@drawable/layout_border"
-            android:orientation="vertical">
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:layout_weight="0.36">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:layout_margin="10dp"
+                >
 
                 <ImageView
                     android:id="@+id/qr_stu_img"
+                    android:src="@drawable/twice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/twice" />
+                    android:scaleType="fitXY" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                     <TextView
                         android:id="@+id/qr_stu_name"
@@ -95,13 +116,12 @@
             </LinearLayout>
 
             <LinearLayout
-                android:paddingLeft="7dp"
-                android:paddingRight="7dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:layout_weight="1"
-
-                android:orientation="vertical">
+                android:background="#FFF923"
+                >
 
                 <TextView
                     android:id="@+id/qr_date"
@@ -123,8 +143,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:layout_weight="1.6"
-                android:orientation="horizontal">
+                >
 
                 <ProgressBar
                     android:id="@+id/qr_bar"
@@ -133,24 +154,23 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:max="9000"
-                    android:progress="0" />
-
+                    android:progress="0"
+                    android:max="9000" />
                 <RelativeLayout
-                    android:id="@+id/qr_relative"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="2">
+                    android:id="@+id/qr_relative"
+                    android:layout_weight="2"
+                    android:layout_gravity="center">
 
                     <TextView
-                        android:id="@+id/qr_timer_t"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
                         android:text="10"
                         android:textSize="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/qr_timer_t"
 
                         />
 
@@ -159,9 +179,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:onClick="onButtonClicked"
                         android:src="@drawable/success"
-                        android:visibility="invisible" />
+                        android:onClick="onButtonClicked"
+                        android:visibility="invisible"/>
 
                 </RelativeLayout>
 

@@ -78,6 +78,7 @@ public class ConfirmPatternActivity extends BasePatternActivity
     public void onPatternDetected(List<PatternView.Cell> pattern) {
         if (isPatternCorrect(pattern)) {
             onConfirmed();
+            //패턴이 일치한다면 QRcode 화면으로 이동
             Intent intent = (Intent)new Intent();
             intent.setComponent(new ComponentName("com.example.myapplication", "com.example.myapplication.QRcode"));
             startActivity(intent);

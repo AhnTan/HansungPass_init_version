@@ -22,4 +22,10 @@ public class ThemeUtils {
     public static void applyTheme(Activity activity) {
         activity.setTheme(getThemeId(activity));
     }
+
+
+    public static void isNext(Context context){
+
+    }
+
 }

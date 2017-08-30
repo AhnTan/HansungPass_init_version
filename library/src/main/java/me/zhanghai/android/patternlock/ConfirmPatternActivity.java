@@ -5,6 +5,8 @@
 
 package me.zhanghai.android.patternlock;
 
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -76,6 +78,9 @@ public class ConfirmPatternActivity extends BasePatternActivity
     public void onPatternDetected(List<PatternView.Cell> pattern) {
         if (isPatternCorrect(pattern)) {
             onConfirmed();
+            Intent intent = (Intent)new Intent();
+            intent.setComponent(new ComponentName("com.example.myapplication", "com.example.myapplication.QRcode"));
+            startActivity(intent);
         } else {
             mMessageText.setText(R.string.pl_wrong_pattern);
             mPatternView.setDisplayMode(PatternView.DisplayMode.Wrong);

@@ -168,17 +168,6 @@ public class QRcode extends AppCompatActivity {
             }
         };
 
-        //설정버튼
-        Button btn2 = (Button)findViewById(R.id.qr_setting_btn);
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(),Setting.class);
-                startActivity(intent);
-
-            }
-        });
 
         thread3 = new pauestimer();
         thread3.setDaemon(true);

@@ -33,7 +33,9 @@ public class PatternLockUtils {
     }
 
     public static boolean isPatternCorrect(List<PatternView.Cell> pattern, Context context) {
+
         return TextUtils.equals(PatternUtils.patternToSha1String(pattern), getPatternSha1(context));
+
     }
 
     public static void clearPattern(Context context) {
@@ -73,4 +75,6 @@ public class PatternLockUtils {
     public interface OnConfirmPatternResultListener {
         void onConfirmPatternResult(boolean successful);
     }
+
+
 }

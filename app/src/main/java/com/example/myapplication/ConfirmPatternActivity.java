@@ -1,12 +1,15 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import java.util.List;
-import me.zhanghai.android.patternlock.PatternView;
-import com.example.myapplication.util.ThemeUtils;
+
 import com.example.myapplication.util.PatternLockUtils;
 import com.example.myapplication.util.PreferenceContract;
 import com.example.myapplication.util.PreferenceUtils;
+import com.example.myapplication.util.ThemeUtils;
+
+import java.util.List;
+
+import me.zhanghai.android.patternlock.PatternView;
 
 public class ConfirmPatternActivity extends me.zhanghai.android.patternlock.ConfirmPatternActivity {
 
@@ -14,7 +17,6 @@ public class ConfirmPatternActivity extends me.zhanghai.android.patternlock.Conf
     protected void onCreate(Bundle savedInstanceState) {
 
         ThemeUtils.applyTheme(this);
-
         super.onCreate(savedInstanceState);
     }
 
@@ -25,9 +27,16 @@ public class ConfirmPatternActivity extends me.zhanghai.android.patternlock.Conf
 
 
     @Override
-    protected boolean isPatternCorrect(List<PatternView.Cell> pattern) {
+    public boolean isPatternCorrect(List<PatternView.Cell> pattern) {
+
         return PatternLockUtils.isPatternCorrect(pattern, this);
     }
+
+
+
+
+
+
     /*
     @Override
     protected void onForgotPassword() {

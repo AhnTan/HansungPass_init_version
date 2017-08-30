@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -69,13 +68,9 @@ public class Setting extends AppCompatActivity {
                 data.add(new SearchMenuItem(R.drawable.a));
                 data.add(new SearchMenuItem(R.drawable.a));
                 */
-                data.add(new Setting_item("잠금방식", "지문,얼굴"));
+                data.add(new Setting_item("잠금방식", "지문,패턴"));
                 data.add(new Setting_item("지문 인식", "등록된 지문이 있습니다"));
                 data.add(new Setting_item("패턴 방식", "등록된 패턴이 없습니다"));
-                data.add(new Setting_item("설정4", "설정4은 다음과 같습니다"));
-                data.add(new Setting_item("설정5", "설정5은 다음과 같습니다"));
-                data.add(new Setting_item("설정6", "설정6은 다음과 같습니다"));
-                data.add(new Setting_item("설정7", "설정7은 다음과 같습니다"));
 
                 //bit.recycle();
                 //bit2.recycle();

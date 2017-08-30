@@ -31,10 +31,9 @@
         <activity android:name=".Setting" />
         <activity android:name=".finger" />
         <activity android:name=".QRcode" />
-        <activity
-            android:name=".ClockView"
-            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".SetPatternActivity" />
+        <activity android:name=".SetLockActivity"/>
+        <activity android:name=".SetFPActivity"/>
         <activity android:name=".ConfirmPatternActivity"></activity>
     </application>
 

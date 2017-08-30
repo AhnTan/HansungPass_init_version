@@ -101,7 +101,7 @@ public class Setting extends AppCompatActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                    //리스트뷰의 아이템 (한 행)이 클릭된 경우를 처리
+                    // 리스트뷰의 아이템 (한 행)이 클릭된 경우를 처리
                     // 클릭이 되었을 때 넘어오는 패러미터 중 position이라는 이름을 가진 int타입의 변수는
                     // 리스트뷰에서 몇번째 아이템이 클릭되었는지 숫자로 나타냄
                     Intent intent;

@@ -67,3 +67,7 @@ v0.23
 v0.43
 패턴이 일치할 경우 QRcode Activity로 넘어감
 App 이미지와 라벨 변경
+
+v0.44
+setting화면 하다가 집감
+setting에서 리스트 클릭하면 각 액티비티 넘어가도록

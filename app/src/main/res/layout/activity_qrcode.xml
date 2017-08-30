@@ -103,13 +103,13 @@
                         android:textSize="20dp" />
 
                     <TextView
-                        android:id="@+id/qr_timer_t2"
+                        android:id="@+id/qr_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="10dp"
-                        android:text="time"
-                        android:textSize="20dp" />
+                        android:text="2017.06.19 16:02:32"
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -120,24 +120,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:background="#FFF923"
                 >
 
-                <TextView
-                    android:id="@+id/qr_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="2017.06.19 16:02:32"
-                    android:textSize="20dp" />
-
                 <ImageView
-
                     android:id="@+id/qr_qrcode_img"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center" />
-
             </LinearLayout>
 
             <LinearLayout

@@ -61,36 +61,44 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         android:text="다현"
-                        android:textSize="20dp" />
+                        android:textSize="19dp" />
 
                     <TextView
                         android:id="@+id/qr_stu_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         android:text="1591033"
-                        android:textSize="20dp" />
+                        android:textSize="19dp" />
 
                     <TextView
                         android:id="@+id/qr_stu_major"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
+                        android:layout_margin="5dp"
                         android:text="컴퓨터공학부"
-                        android:textSize="20dp" />
+                        android:textSize="19dp" />
 
                     <TextView
-                        android:id="@+id/qr_timer_t2"
+                    android:id="@+id/qr_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:text="2017.12.31"
+                    android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/qr_date_b"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="10dp"
-                        android:text="time"
-                        android:textSize="20dp" />
+                        android:text="00:00:00"
+                        android:textSize="17dp" />
 
                 </LinearLayout>
 
@@ -101,24 +109,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_weight="1"
-
                 >
 
-                <TextView
-                    android:id="@+id/qr_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="2017.06.19 16:02:32"
-                    android:textSize="20dp" />
-
                 <ImageView
-
                     android:id="@+id/qr_qrcode_img"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -136,7 +133,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:progress="0"
-                    android:max="9000" />
+                    android:max="3000" />
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

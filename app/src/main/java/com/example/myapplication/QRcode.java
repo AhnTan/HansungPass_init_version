@@ -35,12 +35,14 @@ public class QRcode extends AppCompatActivity {
     private Handler mHandler;
     private Handler timerHandler;
     private Handler stopHandler;
+    private Handler ontimeHandler;
     private Bundle bundle;
     private Bundle timerbundle;
     private ConnectThread thread;
     private TimerThread thread2;
-    private pauestimer thread3;
-    static int k = 9000;
+    //private pausetimer thread3;
+    private onTimeThread thread4;
+    static int k = 3000;
     private long now;
     private Date date;
     private SimpleDateFormat sdfNow;
@@ -49,15 +51,12 @@ public class QRcode extends AppCompatActivity {
     private String qr_date;
     private String md5;
     private TextView dateNow;
-    private Intent clockview;
-    private Intent getfinger;
-    private String qrurl;
+    private TextView dateNow_b;
     private TextView timev;
     private String[] ReturnList;
     private ImageButton ibtn;
     private String pid;
     private Button btn2;
-    private MainActivity.FirstConnectThread ma ;
     private SharedPreferences se;
 
     @Override
@@ -78,20 +77,12 @@ public class QRcode extends AppCompatActivity {
         thread.start();
 
 
-        // 현재시간을 msec 으로 구한다.
-        now = System.currentTimeMillis();
-        // 현재시간을 date 변수에 저장한다.
-        date = new Date(now);
-        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-        sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        // nowDate 변수에 값을 저장한다.
-        formatDate = sdfNow.format(date);
-
-        dateNow = (TextView) findViewById(R.id.qr_date);
-        dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
-
         timev = (TextView)findViewById(R.id.qr_timer_t);
         ibtn = (ImageButton)findViewById(R.id.qr_time);
+        dateNow = (TextView) findViewById(R.id.qr_date);
+        dateNow_b = (TextView) findViewById(R.id.qr_date_b);
+
+
         //서버에서 받은 QR코드 url을 핸들러를 통해 웹뷰에 붙여줌
         mHandler = new Handler(){
             public void handleMessage(Message msg){
@@ -142,6 +133,24 @@ public class QRcode extends AppCompatActivity {
             }
         };
 
+        ontimeHandler = new Handler(){
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                bundle = msg.getData();
+                //Uri uri = Uri.parse(s);
+                String a = bundle.getString("year");
+                String b = bundle.getString("sec");
+
+                //int timess = ontimebundle.getInt("timer");
+                //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
+                //timev.setText(Integer.toString(timess));
+
+
+                dateNow.setText(a);
+                dateNow_b.setText(b);
+            }
+        };
+
         // 시간초 나오게하는 핸들러
         timerHandler = new Handler(){
             public void handleMessage(Message msg){
@@ -152,7 +161,7 @@ public class QRcode extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
                 timev.setText(Integer.toString(timess));
 
-                if(timess < 2000){
+                if(timess < 2970){
                     timev.setVisibility(View.INVISIBLE);
                     ibtn.setVisibility(View.VISIBLE);
                 }
@@ -166,12 +175,18 @@ public class QRcode extends AppCompatActivity {
         };
 
 
-        thread3 = new pauestimer();
+        /*
+        thread3 = new pausetimer();
         thread3.setDaemon(true);
         thread3.start();
+        */
         thread2 = new TimerThread();
         thread2.setDaemon(true);
         thread2.start();
+
+        thread4 = new onTimeThread();
+        thread4.setDaemon(true);
+        thread4.start();
 
     }
 
@@ -179,8 +194,13 @@ public class QRcode extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        //thread.interrupt();
-        //thread2.interrupt();
+        thread.interrupt();
+        thread2.interrupt();
+        thread4.interrupt();
+
+        //thread.setDaemon(true);
+        //thread2.setDaemon(true);
+        //thread4.setDaemon(true);
         startActivity(intent);
         super.onBackPressed();
     }
@@ -189,31 +209,48 @@ public class QRcode extends AppCompatActivity {
     public void onButtonClicked(View v){
 
         k=0;
-        // 현재시간을 msec 으로 구한다.
-        now = System.currentTimeMillis();
-        // 현재시간을 date 변수에 저장한다.
-        date = new Date(now);
-        // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
-        sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        // nowDate 변수에 값을 저장한다.
-        formatDate = sdfNow.format(date);
-        dateNow = (TextView) findViewById(R.id.qr_date);
-        dateNow.setText(formatDate);    // TextView 에 현재 시간 문자열 할당
-
 
         timev = (TextView)findViewById(R.id.qr_timer_t);
         ibtn = (ImageButton)findViewById(R.id.qr_time);
         ibtn.setVisibility(View.INVISIBLE);
         timev.setVisibility(View.VISIBLE);
 
-
+        thread2.interrupt();
+        thread4.interrupt();
         thread = new ConnectThread();
         thread.start();
         thread2 = new TimerThread();
+        thread2.setDaemon(true);
         thread2.start();
     }
 
-    class pauestimer extends Thread{
+    class onTimeThread extends Thread{
+       public void run() {
+           while(true) {
+               // 현재시간을 msec 으로 구한다.
+               now = System.currentTimeMillis();
+               // 현재시간을 date 변수에 저장한다.
+               date = new Date(now);
+               // 시간을 나타냇 포맷을 정한다 ( yyyy/MM/dd 같은 형태로 변형 가능 )
+               sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+               // nowDate 변수에 값을 저장한다.
+               formatDate = sdfNow.format(date);
+               String[] nowtimer = formatDate.split(" ");
+               String nowtimer_a = nowtimer[0];
+               String nowtimer_b = nowtimer[1];
+
+               Bundle ontimebundle = new Bundle();
+               ontimebundle.putString("year", nowtimer_a);
+               ontimebundle.putString("sec", nowtimer_b);
+               Message timermsg = new Message();
+               timermsg.setData(ontimebundle);
+               ontimeHandler.sendMessage(timermsg);
+           }
+       }
+    }
+
+    /*
+    class pausetimer extends Thread{
         public void run(){
             try{
                 Thread.sleep(3000);
@@ -223,6 +260,7 @@ public class QRcode extends AppCompatActivity {
             }
         }
     }
+    */
 
     class TimerThread extends Thread{
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
@@ -232,7 +270,7 @@ public class QRcode extends AppCompatActivity {
         public void run(){
             // 프로그래스바 (위와 동일)
 
-            k=9000;
+            k=3000;
 
             for(; k>=0; k--){
                 progressBar.setProgress(k);
@@ -245,11 +283,12 @@ public class QRcode extends AppCompatActivity {
 
 
                 try{
-                    Thread.sleep(1);
+                    Thread.sleep(998);
                 }
 
                 catch(Exception e){
                     e.printStackTrace();
+                    return;
                 }
             }
             Bundle stopbundle = new Bundle();
@@ -289,14 +328,13 @@ public class QRcode extends AppCompatActivity {
                 //String output = pid;
                 //String output = pid + formatDate;
                 System.out.println(">>>>>>>>>>>>>>>> : " + ppid);
-                String output = ppid + formatDate;
+                String output = ppid + "%3B%3B";
                 ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
                 outstream.writeObject(output);
                 outstream.flush();
                 System.out.println("서버로 보낸 데이터 : " + output);
-                //Toast.makeText(MainActivity.this, "서버로 보낸 데이터 : " + output , Toast.LENGTH_SHORT).show();
 
-                String output2 = "%3B%3B";
+                String output2 = formatDate + "%3B%3B";
                 //String output2 = "send2";
                 ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
                 outstream2.writeObject(output2);
@@ -327,6 +365,7 @@ public class QRcode extends AppCompatActivity {
             catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("접근실패");
+                return;
             }
         }
     }

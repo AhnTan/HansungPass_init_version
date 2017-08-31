@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
             String id = "허가";
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
-                startActivity(intent);
-               // thread = new FirstConnectThread();
-               // thread.start();
+                //Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                //startActivity(intent);
+                thread = new FirstConnectThread();
+                thread.start();
                 /*
                 Log.d("kkk", "아 왜안돼");
                 */
@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
             catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("접근실패");
+                return;
             }
         }
     }

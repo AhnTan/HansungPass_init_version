@@ -77,15 +77,15 @@ public class QRcode extends AppCompatActivity {
         thread.start();
 
 
-        timev = (TextView) findViewById(R.id.qr_timer_t);
-        ibtn = (ImageButton) findViewById(R.id.qr_time);
+        timev = (TextView)findViewById(R.id.qr_timer_t);
+        ibtn = (ImageButton)findViewById(R.id.qr_time);
         dateNow = (TextView) findViewById(R.id.qr_date);
         dateNow_b = (TextView) findViewById(R.id.qr_date_b);
 
 
         //서버에서 받은 QR코드 url을 핸들러를 통해 웹뷰에 붙여줌
-        mHandler = new Handler() {
-            public void handleMessage(Message msg) {
+        mHandler = new Handler(){
+            public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 bundle = msg.getData();
                 String ss = bundle.getString("key");
@@ -96,6 +96,7 @@ public class QRcode extends AppCompatActivity {
                 Log.d("aabbccdd", qr_id);
                 Log.d("bbddee", md5);
 
+                // QRCodeWriter 라이브러리
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
                 try {
@@ -113,8 +114,8 @@ public class QRcode extends AppCompatActivity {
             }
         };
 
-        stopHandler = new Handler() {
-            public void handleMessage(Message msg) {
+        stopHandler = new Handler(){
+            public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 bundle = msg.getData();
                 String ss = bundle.getString("key");
@@ -133,8 +134,8 @@ public class QRcode extends AppCompatActivity {
             }
         };
 
-        ontimeHandler = new Handler() {
-            public void handleMessage(Message msg) {
+        ontimeHandler = new Handler(){
+            public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 bundle = msg.getData();
                 //Uri uri = Uri.parse(s);
@@ -152,8 +153,8 @@ public class QRcode extends AppCompatActivity {
         };
 
         // 시간초 나오게하는 핸들러
-        timerHandler = new Handler() {
-            public void handleMessage(Message msg) {
+        timerHandler = new Handler(){
+            public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 timerbundle = msg.getData();
                 //Uri uri = Uri.parse(s);
@@ -161,10 +162,11 @@ public class QRcode extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
                 timev.setText(Integer.toString(timess));
 
-                if (timess < 2970) {
+                if(timess < 15){
                     timev.setVisibility(View.INVISIBLE);
                     ibtn.setVisibility(View.VISIBLE);
-                } else {
+                }
+                else{
                     timev.setVisibility(View.VISIBLE);
                     ibtn.setVisibility(View.INVISIBLE);
                 }
@@ -191,7 +193,7 @@ public class QRcode extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), OldFirstView.class);
+        Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         thread.interrupt();
         thread2.interrupt();
@@ -205,12 +207,12 @@ public class QRcode extends AppCompatActivity {
     }
 
     // 새로운 QR코드를 받고싶을때 버튼 이벤트
-    public void onButtonClicked(View v) {
+    public void onButtonClicked(View v){
 
-        k = 0;
+        k=0;
 
-        timev = (TextView) findViewById(R.id.qr_timer_t);
-        ibtn = (ImageButton) findViewById(R.id.qr_time);
+        timev = (TextView)findViewById(R.id.qr_timer_t);
+        ibtn = (ImageButton)findViewById(R.id.qr_time);
         ibtn.setVisibility(View.INVISIBLE);
         timev.setVisibility(View.VISIBLE);
 
@@ -223,9 +225,9 @@ public class QRcode extends AppCompatActivity {
         thread2.start();
     }
 
-    class onTimeThread extends Thread {
+    class onTimeThread extends Thread{
         public void run() {
-            while (true) {
+            while(true) {
                 // 현재시간을 msec 으로 구한다.
                 now = System.currentTimeMillis();
                 // 현재시간을 date 변수에 저장한다.
@@ -261,17 +263,17 @@ public class QRcode extends AppCompatActivity {
     }
     */
 
-    class TimerThread extends Thread {
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.qr_bar);
+    class TimerThread extends Thread{
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
 
         // Button btn = (Button)findViewById(R.id.qr_time);
 
-        public void run() {
+        public void run(){
             // 프로그래스바 (위와 동일)
 
-            k = 3000;
+            k=30;
 
-            for (; k >= 0; k--) {
+            for(; k>=0; k--){
                 progressBar.setProgress(k);
 
                 Bundle tbundle = new Bundle();
@@ -281,9 +283,11 @@ public class QRcode extends AppCompatActivity {
                 timerHandler.sendMessage(timermsg);
 
 
-                try {
+                try{
                     Thread.sleep(998);
-                } catch (Exception e) {
+                }
+
+                catch(Exception e){
                     e.printStackTrace();
                     return;
                 }
@@ -299,15 +303,15 @@ public class QRcode extends AppCompatActivity {
     }
 
     // 쓰레드 (서버연결 및 프로그래스바) - 현재는 임시로 한 쓰레드에 그냥 넣어둠
-    class ConnectThread extends Thread {
+    class ConnectThread extends Thread{
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
-        public void run() {
+        public void run(){
             //String host = "172.30.1.53";
-            String host = "223.194.156.124";
+            String host = "113.198.84.55";
             //String host = "223.194.158.91";
             //String host = "113.198.81.69";
             //String host = "223.194.134.161";
-            int port = 5001;
+            int port = 80;
             //String host = "172.30.1.53";
             //int port = 8080;
 
@@ -358,7 +362,8 @@ public class QRcode extends AppCompatActivity {
                 outstream.close();
                 socket.close();
 
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("접근실패");
                 return;
@@ -366,16 +371,16 @@ public class QRcode extends AppCompatActivity {
         }
     }
 
-    public static Bitmap toBitmap(BitMatrix martrix) {
+    public static Bitmap toBitmap(BitMatrix martrix){
         int height = martrix.getHeight();
         int width = martrix.getWidth();
         //int height = 100;
         //int width = 100;
         //Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                bmp.setPixel(i, j, martrix.get(i, j) ? Color.BLACK : Color.WHITE);
+        for(int i = 0; i<width; i++){
+            for(int j = 0; j<height; j++){
+                bmp.setPixel(i,j,martrix.get(i,j) ? Color.BLACK : Color.WHITE);
             }
         }
         return bmp;

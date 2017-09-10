@@ -62,7 +62,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:text="다현"
                         android:textSize="19dp" />
 
                     <TextView
@@ -71,7 +70,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:text="1591033"
                         android:textSize="19dp" />
 
                     <TextView

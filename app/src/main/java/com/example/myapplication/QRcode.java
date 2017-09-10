@@ -88,19 +88,26 @@ public class QRcode extends AppCompatActivity {
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 bundle = msg.getData();
-                String ss = bundle.getString("key");
+                String qr = bundle.getString("qr_key");
+                String user_id = bundle.getString("id_key");
+                String user_name = bundle.getString("name_key");
 
-                String[] ReturnList = ss.split("%3B%3B");
+                String[] ReturnList = qr.split("%3B%3B");
                 qr_id = ReturnList[0] + "%3B%3B";
                 md5 = ReturnList[1];
                 Log.d("aabbccdd", qr_id);
                 Log.d("bbddee", md5);
 
+                TextView name_tv = (TextView)findViewById(R.id.qr_stu_name);
+                name_tv.setText(user_name);
+                TextView id_tv = (TextView)findViewById(R.id.qr_stu_id);
+                id_tv.setText(user_id);
+
                 // QRCodeWriter 라이브러리
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
                 try {
-                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(ss, BarcodeFormat.QR_CODE, 200, 200));
+                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(qr, BarcodeFormat.QR_CODE, 200, 200));
                     ImageView qr_code_view = (ImageView) findViewById(R.id.qr_qrcode_img);
                     qr_code_view.setImageBitmap(bitmap);
                     qr_code_view.setVisibility(View.VISIBLE);
@@ -118,7 +125,9 @@ public class QRcode extends AppCompatActivity {
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
                 bundle = msg.getData();
-                String ss = bundle.getString("key");
+                String qr = bundle.getString("qr_key");
+                String user_id = bundle.getString("id_key");
+                String user_name = bundle.getString("name_key");
 
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
                 try {
@@ -346,13 +355,30 @@ public class QRcode extends AppCompatActivity {
                 //Bitmap bitmap = (Bitmap)instream.readObject();
                 Object input = instream.readObject();
                 //System.out.println(instream.readObject());
-                System.out.println("서버로부터 받은 데이터: " + input);
+                System.out.println("서버로부터 받은 QR데이터: " + input);
+                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
+
+
+                ObjectInputStream instream2 = new ObjectInputStream(socket.getInputStream());
+                //Bitmap bitmap = (Bitmap)instream.readObject();
+                Object input2 = instream2.readObject();
+                //System.out.println(instream.readObject());
+                System.out.println("서버로부터 받은 학번 데이터: " + input2);
+                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
+
+                ObjectInputStream instream3 = new ObjectInputStream(socket.getInputStream());
+                //Bitmap bitmap = (Bitmap)instream.readObject();
+                Object input3 = instream3.readObject();
+                //System.out.println(instream.readObject());
+                System.out.println("서버로부터 받은 이름 데이터: " + input3);
                 //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
 
 
                 // 서버에서 받은 데이터(QR코드)를 번들을 통해 핸들러 메세지로 전달
                 Bundle bundle = new Bundle();
-                bundle.putString("key", input.toString());
+                bundle.putString("qr_key", input.toString());
+                bundle.putString("id_key", input2.toString());
+                bundle.putString("name_key", input3.toString());
                 Message msg = new Message();
                 msg.setData(bundle);
                 mHandler.sendMessage(msg);

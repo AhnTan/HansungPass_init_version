@@ -43,8 +43,8 @@ public class finger extends AppCompatActivity {
         //intent.putExtra("pid", pid);
 
 
-        mHandler = new Handler(){
-            public void handleMessage(Message msg){
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 bundle = msg.getData();
 
@@ -55,17 +55,15 @@ public class finger extends AppCompatActivity {
             }
         };
 
-        img = (ImageView)findViewById(R.id.imageView);
+        img = (ImageView) findViewById(R.id.imageView);
         Reprint.initialize(this);
         Reprint.authenticate(new AuthenticationListener() {
             @Override
             public void onSuccess(int moduleTag) {
                 img.setImageResource(R.drawable.success);
-                try{
+                try {
                     Thread.sleep(1000);
-                }
-                catch(Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -151,10 +149,10 @@ public class finger extends AppCompatActivity {
         }
     }
 */
-    private boolean checkDeviceSpec(){
+    private boolean checkDeviceSpec() {
         boolean fingerprintFlag = Reprint.isHardwarePresent();
         boolean hasRegisteredFlag = Reprint.hasFingerprintRegistered();
-        if(hasRegisteredFlag)
+        if (hasRegisteredFlag)
             img.setImageResource(R.drawable.twice);
         else
             img.setImageResource(R.drawable.failure);

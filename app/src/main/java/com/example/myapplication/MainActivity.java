@@ -1,14 +1,10 @@
 package com.example.myapplication;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -43,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if((ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) ){
-            ActivityCompat.requestPermissions(this, new String[]{
-                    Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE
-            },466);
-        }
 
         now = System.currentTimeMillis();
         // 현재시간을 date 변수에 저장한다.
@@ -91,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class FirstConnectThread extends Thread{
-        int port = 80;
+        int port = 5001;
         Object input;
         String output_id;
         String output_pw;
@@ -102,14 +93,7 @@ public class MainActivity extends AppCompatActivity {
             //String host = "localhost";
             //String host = "223.194.158.91";
             //String host = "223.194.134.161";
-            //String host = "110.70.15.167";
-            //String host = "172.20.10.12";
-            //String host = "223.194.156.151";
-            //String host = "192.168.0.89";
-
-            //String host = "223.194.156.151";
-            String host = "113.198.84.55";
-
+            String host = "223.194.156.124";
             //int port = 5001;
             //String host = "172.30.1.53";
             //int port = 8080;

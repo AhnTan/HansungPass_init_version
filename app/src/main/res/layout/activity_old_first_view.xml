@@ -35,37 +35,25 @@
     </FrameLayout>
 
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="70dp"
+        app:srcCompat="@drawable/idcard" />
 
-        <Button
-            android:id="@+id/ofv_load_btn"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="150dp"
-            android:text="학생증 불러오기(지문)"
-            android:textSize="20dp" />
-
-        <Button
-            android:id="@+id/patternbutton"
-            android:text="학생증 불러오기(패턴)"
-            android:textSize="20dp"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="300dp"
-            />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="100dp" />
-
-    </FrameLayout>
+    <Button
+        android:id="@+id/ofv_load_btn"
+        android:layout_width="210dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="150dp"
+        android:background="@android:color/holo_blue_dark"
+        android:text="학생증 불러오기"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp" />
 
 </LinearLayout>

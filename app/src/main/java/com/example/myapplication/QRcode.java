@@ -96,7 +96,6 @@ public class QRcode extends AppCompatActivity {
                 Log.d("aabbccdd", qr_id);
                 Log.d("bbddee", md5);
 
-                // QRCodeWriter 라이브러리
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
                 try {
@@ -162,7 +161,7 @@ public class QRcode extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "kkk" , Toast.LENGTH_SHORT).show();
                 timev.setText(Integer.toString(timess));
 
-                if(timess < 15){
+                if(timess < 2970){
                     timev.setVisibility(View.INVISIBLE);
                     ibtn.setVisibility(View.VISIBLE);
                 }
@@ -271,7 +270,7 @@ public class QRcode extends AppCompatActivity {
         public void run(){
             // 프로그래스바 (위와 동일)
 
-            k=30;
+            k=3000;
 
             for(; k>=0; k--){
                 progressBar.setProgress(k);
@@ -307,11 +306,11 @@ public class QRcode extends AppCompatActivity {
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
             //String host = "172.30.1.53";
-            String host = "113.198.84.55";
+            String host = "223.194.156.124";
             //String host = "223.194.158.91";
             //String host = "113.198.81.69";
             //String host = "223.194.134.161";
-            int port = 80;
+            int port = 5001;
             //String host = "172.30.1.53";
             //int port = 8080;
 

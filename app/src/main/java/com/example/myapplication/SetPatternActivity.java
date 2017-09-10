@@ -3,12 +3,13 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.myapplication.util.AppUtils;
+import com.example.myapplication.util.PatternLockUtils;
+import com.example.myapplication.util.ThemeUtils;
+
 import java.util.List;
 
 import me.zhanghai.android.patternlock.PatternView;
-import com.example.myapplication.util.ThemeUtils;
-import com.example.myapplication.util.PatternLockUtils;
-import com.example.myapplication.util.AppUtils;
 
 public class SetPatternActivity extends me.zhanghai.android.patternlock.SetPatternActivity {
 

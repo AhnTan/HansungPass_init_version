@@ -40,6 +40,7 @@
         android:gravity="bottom|center_horizontal"
         android:paddingBottom="30dp"
         android:text="등록된 학생증이 없습니다." />
+
     <Button
         android:id="@+id/nfv_register_btn"
         android:layout_width="wrap_content"

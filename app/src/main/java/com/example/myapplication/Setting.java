@@ -37,10 +37,12 @@ public class Setting extends AppCompatActivity {
 
         Log.d("3", "3");
     }
+
     public class MyAsyncTask extends AsyncTask<ArrayList<Setting_item>, ArrayList<Setting_item>, ArrayList<Setting_item>> {
         //doInbackground 메소드가 실행되기전 실행되는 메소드이다. 비동기 처리전에 무엇인가 처리를 하고 싶다면 사용
         protected void onPreExecute() {
         }
+
         // 처리하고 싶은 내용
         protected ArrayList<Setting_item> doInBackground(ArrayList<Setting_item>... params) {
             Log.d("4", "4");

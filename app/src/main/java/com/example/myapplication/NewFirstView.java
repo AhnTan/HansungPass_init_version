@@ -18,27 +18,25 @@ public class NewFirstView extends AppCompatActivity {
         setContentView(R.layout.activity_new_first_view);
 
 
-
-        btn = (Button)findViewById(R.id.nfv_register_btn);
+        btn = (Button) findViewById(R.id.nfv_register_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Intent mainintent = getIntent();
                 //String pid = mainintent.getStringExtra("pid");
-                Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
+                Intent intent = new Intent(getApplicationContext(), OldFirstView.class);
                 //intent.putExtra("pid", pid);
                 startActivity(intent);
             }
         });
 
 
-
         //설정버튼
-        btn2 = (Button)findViewById(R.id.nfv_setting_btn);
+        btn2 = (Button) findViewById(R.id.nfv_setting_btn);
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settingintent = new Intent(getApplicationContext(),Setting.class);
+                settingintent = new Intent(getApplicationContext(), Setting.class);
                 startActivity(settingintent);
             }
         });

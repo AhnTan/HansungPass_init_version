@@ -26,7 +26,7 @@ public class OldFirstView extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (pref.getBoolean("FP",true)) {
+                if (pref.getBoolean("FP", true)) {
                     Intent intent = new Intent(getApplicationContext(), finger.class);
                     startActivity(intent);
                 } else {

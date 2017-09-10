@@ -78,7 +78,12 @@ qrcode-xml 수정 : 현재시간 실시간으로 수정
 임시적으로(최대3000초, 2970초 때부터 새값받아오는 버튼 뜨게함)
 시간관련 쓰레드들 interrupt 수정
 
-# 09=10
+# 09-10
 v0.17
 3/4G로 들어갈 수 있게 host와 port 수정 ()
 메인액티비티에 네트워크 접속권한 추가
+
+v0.45
+사용자가 지정한 방법(지문/패턴)으로 학생증을 불러오도록 수정
+- SetLockActivity - sharedPreference
+- OldFirstView - 지문/패턴 Activity 불러오기

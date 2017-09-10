@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
-                //startActivity(intent);
-                thread = new FirstConnectThread();
-                thread.start();
+                Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                startActivity(intent);
+                //thread = new FirstConnectThread();
+                //thread.start();
                 /*
                 Log.d("kkk", "아 왜안돼");
                 */

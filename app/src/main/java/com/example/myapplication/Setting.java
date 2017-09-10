@@ -118,10 +118,11 @@ public class Setting extends AppCompatActivity {
                         case 1:
                             intent = new Intent(getApplicationContext(), SetFPActivity.class);
                             startActivity(intent);
+
                             break;
                         //패턴방식
                         case 2:
-                            intent = new Intent(getApplicationContext(), SetPatternActivity.class);
+                            intent = new Intent(getApplicationContext(),SetPatternActivity.class);
                             startActivity(intent);
                             break;
                         //position의 값이 위에서 지정한 case에 하나도 맞지 않을경우

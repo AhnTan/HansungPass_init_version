@@ -19,9 +19,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    String host = "223.194.158.91";    // 서버 컴퓨터 IP
+    String host = "113.198.84.55";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
-    int port = 5001;
+    int port = 80;
     //yyyyyyjjjjhhhhhjjjjj
     FirstConnectThread thread;
     Bundle bundle;
@@ -57,10 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
-                //startActivity(intent);
-                thread = new FirstConnectThread();
-                thread.start();
+                Intent intent = new Intent(getApplicationContext(),NewFirstView.class);
+                startActivity(intent);
+                //thread = new FirstConnectThread();
+                //thread.start();
                 /*
                 Log.d("kkk", "아 왜안돼");
                 */
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class FirstConnectThread extends Thread {
-        int port = 5001;
+        int port = 80;
         Object input;
         String output_id;
         String output_pw;
@@ -91,14 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run() {
-            //String host = "localhost";
-            //String host = "223.194.158.91";
-            //String host = "223.194.134.161";
-            String host = "223.194.156.124";
-            //int port = 5001;
-            //String host = "172.30.1.53";
-            //int port = 8080;
-
+            String host = "113.198.84.55";
             try {
                 Socket socket = new Socket(host, port);
                 System.out.println("서버로 연결되었습니다. : " + host + ", " + port);

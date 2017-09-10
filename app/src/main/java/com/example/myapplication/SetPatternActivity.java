@@ -16,10 +16,9 @@ public class SetPatternActivity extends me.zhanghai.android.patternlock.SetPatte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         ThemeUtils.applyTheme(this);
-
         super.onCreate(savedInstanceState);
-
         AppUtils.setActionBarDisplayUp(this);
     }
 

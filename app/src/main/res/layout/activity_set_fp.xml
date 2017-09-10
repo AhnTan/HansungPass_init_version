@@ -4,36 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="7dp"
     tools:context="com.example.myapplication.SetLockActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal"
+        android:text="지문등록 및 삭제는 단말기의 설정화면에서 가능합니다. " />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="282dp"
-            app:srcCompat="@drawable/exp" />
+    <Button
+        android:id="@+id/setFPbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@android:color/background_light"
+        android:text="단말기 설정화면으로 이동"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="20dp" />
 
-        <Switch
-            android:id="@+id/FPsb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="지문" />
-
-        <Switch
-            android:id="@+id/PTsb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="패턴" />
-
-
-    </LinearLayout>
 </LinearLayout>

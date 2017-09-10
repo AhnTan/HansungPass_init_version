@@ -39,7 +39,7 @@ public class ConfirmPatternActivity extends BasePatternActivity
                 onCancel();
             }
         });
-        mRightButton.setText(R.string.pl_forgot_pattern);
+       /* mRightButton.setText(R.string.pl_forgot_pattern);
         mRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +52,7 @@ public class ConfirmPatternActivity extends BasePatternActivity
             mNumFailedAttempts = 0;
         } else {
             mNumFailedAttempts = savedInstanceState.getInt(KEY_NUM_FAILED_ATTEMPTS);
-        }
+        }*/
     }
 
     @Override

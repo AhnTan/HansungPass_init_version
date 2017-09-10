@@ -87,3 +87,7 @@ v0.45
 사용자가 지정한 방법(지문/패턴)으로 학생증을 불러오도록 수정
 - SetLockActivity - sharedPreference
 - OldFirstView - 지문/패턴 Activity 불러오기
+
+v0.46
+패턴 언어 수정
+지문 - 단말기 설정화면 불러오기

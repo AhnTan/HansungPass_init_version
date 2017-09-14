@@ -3,18 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     android:orientation="vertical"
-    android:padding="7dp"
-    >
-
+    android:padding="7dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="0.1"
+        android:background="#000000"
         android:orientation="vertical"
         android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HansungPass"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView"
@@ -22,39 +30,70 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:text="학생증"
-            android:textSize="27dp" />
+            android:text="학생증 앞면을 리더기에 대세요."
+            android:textColor="#ffffff"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="440dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.36"
+
             android:background="@drawable/layout_border"
-            android:layout_margin="20dp"
-            android:orientation="vertical"
-            android:layout_weight="0.36">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/hansunglogo" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:text="학생증"
+                    android:textSize="30dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:layout_margin="10dp"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/qr_stu_img"
-                    android:src="@drawable/twice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:src="@drawable/twice" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    >
+                    android:background="#f2f5ff"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/qr_stu_name"
@@ -105,23 +144,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_weight="1"
-                >
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/qr_qrcode_img"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
                 android:layout_weight="1.6"
-                >
+                android:orientation="horizontal">
 
                 <ProgressBar
                     android:id="@+id/qr_bar"
@@ -130,23 +167,26 @@
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:progress="0"
-                    android:max="30" />
+                    android:max="30"
+                    android:progress="0" />
+
                 <RelativeLayout
+                    android:id="@+id/qr_relative"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/qr_relative"
-                    android:layout_weight="2"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_weight="2">
 
                     <TextView
+                        android:id="@+id/qr_timer_t"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10"
-                        android:textSize="30dp"
-                        android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:id="@+id/qr_timer_t"
+                        android:layout_centerVertical="true"
+                        android:layout_marginBottom="5dp"
+                        android:text="10"
+                        android:textColor="#ffffff"
+                        android:textSize="20dp"
 
                         />
 
@@ -155,9 +195,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:src="@drawable/success"
                         android:onClick="onButtonClicked"
-                        android:visibility="invisible"/>
+                        android:src="@drawable/success"
+                        android:visibility="invisible" />
 
                 </RelativeLayout>
 

@@ -129,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
             //String host = "110.70.15.167";
             //String host = "172.20.10.12";
             //String host = "223.194.156.151";
-            //String host = "192.168.0.89";
+            String host = "113.198.84.55";
 
             //String host = "223.194.156.151";
-            String host = "113.198.84.55";
+           // String host = "113.198.84.55";
 
             //int port = 5001;
             //String host = "172.30.1.53";

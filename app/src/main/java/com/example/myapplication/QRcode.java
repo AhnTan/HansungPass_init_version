@@ -8,7 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,7 +28,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class QRcode extends AppCompatActivity {
+public class QRcode extends FragmentActivity {
     String host = "223.194.134.161";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
     int port = 5001;
@@ -63,6 +63,7 @@ public class QRcode extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_qrcode);
 
         //se = getSharedPreferences("id", 0);
@@ -406,7 +407,7 @@ public class QRcode extends AppCompatActivity {
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         for(int i = 0; i<width; i++){
             for(int j = 0; j<height; j++){
-                bmp.setPixel(i,j,martrix.get(i,j) ? Color.BLACK : Color.WHITE);
+                bmp.setPixel(i,j,martrix.get(i,j) ? Color.BLACK : Color.alpha(1));
             }
         }
         return bmp;

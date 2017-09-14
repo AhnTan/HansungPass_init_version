@@ -28,6 +28,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:layout_weight="0.1"
             android:text="학생증 앞면을 리더기에 대세요."
@@ -49,7 +50,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <ImageView
                     android:layout_width="100dp"
@@ -62,11 +64,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
-                    android:text="학생증"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+                    android:text="모바일 학생증"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_weight="1.97" />
+
+
             </LinearLayout>
 
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="287dp"
+                android:layout_height="0.5dp"
+                android:layout_centerInParent="true"
+                android:background="#000000"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,25 +85,23 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/qr_stu_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/twice" />
+                    android:layout_width="110dp"
+                    android:layout_height="140dp"
+                    android:layout_margin="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/image" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:background="#f2f5ff"
                     android:orientation="vertical">
 
                     <TextView
@@ -100,42 +109,77 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="5dp"
+                        android:layout_margin="3dp"
+                        android:textColor="#000000"
                         android:textSize="19dp" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="0.5dp"
+                        android:layout_centerInParent="true"
+                        android:background="#eca09b9b"/>
 
                     <TextView
                         android:id="@+id/qr_stu_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:textSize="19dp" />
+                        android:textColor="#000000"
+                        android:layout_margin="3dp"
+                        android:textSize="15dp" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="0.5dp"
+                        android:layout_centerInParent="true"
+                        android:background="#eca09b9b"/>
 
                     <TextView
                         android:id="@+id/qr_stu_major"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="5dp"
+                        android:layout_margin="3dp"
+                        android:textColor="#000000"
                         android:text="컴퓨터공학부"
-                        android:textSize="19dp" />
+                        android:textSize="13dp" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="0.5dp"
+                        android:layout_centerInParent="true"
+                        android:background="#eca09b9b"/>
 
                     <TextView
                         android:id="@+id/qr_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="2dp"
+                        android:layout_margin="3dp"
+                        android:textColor="#000000"
                         android:text="2017.12.31"
-                        android:textSize="17dp" />
+                        android:textSize="13dp" />
+
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="0.5dp"
+                        android:layout_centerInParent="true"
+                        android:background="#eca09b9b"/>
 
                     <TextView
                         android:id="@+id/qr_date_b"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textColor="#000000"
+                        android:layout_margin="3dp"
                         android:text="00:00:00"
                         android:textSize="17dp" />
+                    <View
+                        android:layout_width="110dp"
+                        android:layout_height="0.5dp"
+                        android:layout_centerInParent="true"
+                        android:background="#eca09b9b"/>
 
                 </LinearLayout>
 
@@ -145,30 +189,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="1">
 
                 <ImageView
                     android:id="@+id/qr_qrcode_img"
-                    android:layout_width="160dp"
+                    android:layout_width="176dp"
                     android:layout_height="160dp"
-                    android:layout_gravity="center" />
+                    android:layout_gravity="center"
+                    android:layout_weight="0.43"
+                    android:background="@drawable/border" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.6"
+                android:layout_weight="1.5"
                 android:orientation="horizontal">
 
                 <ProgressBar
                     android:id="@+id/qr_bar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:max="30"
-                    android:progress="0" />
+                    android:progress="0"
+                    android:progressTint="@android:color/white" />
 
                 <RelativeLayout
                     android:id="@+id/qr_relative"
@@ -179,24 +227,25 @@
 
                     <TextView
                         android:id="@+id/qr_timer_t"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginBottom="5dp"
-                        android:text="10"
                         android:textColor="#ffffff"
-                        android:textSize="20dp"
-
-                        />
+                        android:text="10"
+                        android:textSize="20dp" />
 
                     <ImageButton
                         android:id="@+id/qr_time"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
+                        android:background="?android:attr/activatedBackgroundIndicator"
                         android:onClick="onButtonClicked"
-                        android:src="@drawable/success"
+                        android:scaleType="centerCrop"
+                        android:src="@android:drawable/ic_menu_revert"
                         android:visibility="invisible" />
 
                 </RelativeLayout>

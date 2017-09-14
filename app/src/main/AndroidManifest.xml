@@ -32,7 +32,8 @@
         <activity android:name=".RegisterCheck" />
         <activity android:name=".Setting" />
         <activity android:name=".finger" />
-        <activity android:name=".QRcode" />
+        <activity android:name=".QRcode"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".SetPatternActivity" />
         <activity android:name=".SetLockActivity"/>
         <activity android:name=".SetFPActivity"/>

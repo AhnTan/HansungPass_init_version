@@ -32,7 +32,7 @@
         android:ems="10"
         android:hint="학번(ID)"
         android:inputType="textPersonName"
-        android:text="1392024"
+        android:text="1592017"
         android:textColor="@android:color/darker_gray" />
 
     <EditText

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
@@ -108,7 +110,7 @@ public class QRcode extends FragmentActivity {
                 QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
                 try {
-                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(qr, BarcodeFormat.QR_CODE, 200, 200));
+                    Bitmap bitmap = toBitmap(qrCodeWriter.encode(qr, BarcodeFormat.QR_CODE, 250, 250));
                     ImageView qr_code_view = (ImageView) findViewById(R.id.qr_qrcode_img);
                     qr_code_view.setImageBitmap(bitmap);
                     qr_code_view.setVisibility(View.VISIBLE);
@@ -173,7 +175,7 @@ public class QRcode extends FragmentActivity {
                 timev.setText(Integer.toString(timess));
 
                 if(timess < 15){
-                    timev.setVisibility(View.INVISIBLE);
+                    //timev.setVisibility(View.INVISIBLE);
                     ibtn.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -282,6 +284,7 @@ public class QRcode extends FragmentActivity {
             // 프로그래스바 (위와 동일)
 
             k=30;
+            final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
             for(; k>=0; k--){
                 progressBar.setProgress(k);
@@ -291,7 +294,7 @@ public class QRcode extends FragmentActivity {
                 Message timermsg = new Message();
                 timermsg.setData(tbundle);
                 timerHandler.sendMessage(timermsg);
-
+                vibrator.vibrate(100);
 
                 try{
                     Thread.sleep(998);

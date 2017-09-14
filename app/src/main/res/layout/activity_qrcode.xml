@@ -28,8 +28,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.1"
             android:text="학생증 앞면을 리더기에 대세요."
             android:textColor="#ffffff"
@@ -43,7 +43,6 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
             android:layout_weight="0.36"
-
             android:background="@drawable/layout_border"
             android:orientation="vertical">
 
@@ -64,20 +63,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1.97"
                     android:text="모바일 학생증"
                     android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_weight="1.97" />
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
 
             <View
-                android:layout_marginTop="10dp"
-                android:layout_width="287dp"
+                android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_centerInParent="true"
-                android:background="#000000"/>
+                android:layout_marginTop="10dp"
+                android:background="#000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,29 +109,29 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="3dp"
-                        android:textColor="#000000"
+                        android:textColor="#212020"
                         android:textSize="19dp" />
 
                     <View
                         android:layout_width="110dp"
                         android:layout_height="0.5dp"
                         android:layout_centerInParent="true"
-                        android:background="#eca09b9b"/>
+                        android:background="#eca09b9b" />
 
                     <TextView
                         android:id="@+id/qr_stu_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="#000000"
                         android:layout_margin="3dp"
+                        android:textColor="#212020"
                         android:textSize="15dp" />
 
                     <View
                         android:layout_width="110dp"
                         android:layout_height="0.5dp"
                         android:layout_centerInParent="true"
-                        android:background="#eca09b9b"/>
+                        android:background="#eca09b9b" />
 
                     <TextView
                         android:id="@+id/qr_stu_major"
@@ -140,15 +139,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="3dp"
-                        android:textColor="#000000"
                         android:text="컴퓨터공학부"
+                        android:textColor="#212020"
                         android:textSize="13dp" />
 
                     <View
                         android:layout_width="110dp"
                         android:layout_height="0.5dp"
                         android:layout_centerInParent="true"
-                        android:background="#eca09b9b"/>
+                        android:background="#eca09b9b" />
 
                     <TextView
                         android:id="@+id/qr_date"
@@ -156,30 +155,31 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="3dp"
-                        android:textColor="#000000"
                         android:text="2017.12.31"
+                        android:textColor="#212020"
                         android:textSize="13dp" />
 
                     <View
                         android:layout_width="110dp"
                         android:layout_height="0.5dp"
                         android:layout_centerInParent="true"
-                        android:background="#eca09b9b"/>
+                        android:background="#eca09b9b" />
 
                     <TextView
                         android:id="@+id/qr_date_b"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:textColor="#000000"
                         android:layout_margin="3dp"
                         android:text="00:00:00"
+                        android:textColor="#212020"
                         android:textSize="17dp" />
+
                     <View
                         android:layout_width="110dp"
                         android:layout_height="0.5dp"
                         android:layout_centerInParent="true"
-                        android:background="#eca09b9b"/>
+                        android:background="#eca09b9b" />
 
                 </LinearLayout>
 
@@ -188,14 +188,22 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:orientation="vertical"
                 android:weightSum="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#383838"
+                    android:textStyle="bold"
+                    android:text="STUDENT IDENTIFICATION CARD"/>
 
                 <ImageView
                     android:id="@+id/qr_qrcode_img"
                     android:layout_width="176dp"
-                    android:layout_height="160dp"
+                    android:layout_height="176dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.43"
                     android:background="@drawable/border" />
@@ -218,41 +226,38 @@
                     android:progress="0"
                     android:progressTint="@android:color/white" />
 
-                <RelativeLayout
-                    android:id="@+id/qr_relative"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="2">
 
-                    <TextView
-                        android:id="@+id/qr_timer_t"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginBottom="5dp"
-                        android:textColor="#ffffff"
-                        android:text="10"
-                        android:textSize="20dp" />
+                <ImageButton
+                    android:id="@+id/qr_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="10dp"
+                    android:background="?android:attr/activatedBackgroundIndicator"
+                    android:onClick="onButtonClicked"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_revert"
+                    android:visibility="invisible" />
 
-                    <ImageButton
-                        android:id="@+id/qr_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:background="?android:attr/activatedBackgroundIndicator"
-                        android:onClick="onButtonClicked"
-                        android:scaleType="centerCrop"
-                        android:src="@android:drawable/ic_menu_revert"
-                        android:visibility="invisible" />
-
-                </RelativeLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/qr_timer_t"
+            android:layout_width="47dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_r"
+            android:text="10"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

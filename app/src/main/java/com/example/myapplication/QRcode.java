@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -55,6 +54,9 @@ public class QRcode extends FragmentActivity {
     private TextView timev;
     private ImageButton ibtn;
     private SharedPreferences se;
+    int reset_btn_count;
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,9 @@ public class QRcode extends FragmentActivity {
         //스샷막아주는 코드
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
+        reset_btn_count=0;
+
+        backPressCloseHandler = new BackPressCloseHandler(this); //뒤로버튼 종료
 
         thread = new ConnectThread();
         thread.start();
@@ -168,9 +173,10 @@ public class QRcode extends FragmentActivity {
 
                 if(timess < 15){
                     //timev.setVisibility(View.INVISIBLE);
-                    ibtn.setVisibility(View.VISIBLE);
-                }
-                else{
+                    if(reset_btn_count==0) {
+                        ibtn.setVisibility(View.VISIBLE);
+                    }
+                }else{
                     timev.setVisibility(View.VISIBLE);
                     ibtn.setVisibility(View.INVISIBLE);
                 }
@@ -197,6 +203,13 @@ public class QRcode extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
+
+/*
+    @Override
+    public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(),OldFirstView.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         thread.interrupt();
@@ -208,25 +221,29 @@ public class QRcode extends FragmentActivity {
         //thread4.setDaemon(true);
         startActivity(intent);
         super.onBackPressed();
-    }
+    }*/
 
     // 새로운 QR코드를 받고싶을때 버튼 이벤트
     public void onButtonClicked(View v){
 
-        k=0;
+        reset_btn_count++;
 
-        timev = (TextView)findViewById(R.id.qr_timer_t);
-        ibtn = (ImageButton)findViewById(R.id.qr_time);
-        ibtn.setVisibility(View.INVISIBLE);
-        timev.setVisibility(View.VISIBLE);
+            k=0;
 
-        thread2.interrupt();
-        thread4.interrupt();
-        thread = new ConnectThread();
-        thread.start();
-        thread2 = new TimerThread();
-        thread2.setDaemon(true);
-        thread2.start();
+            timev = (TextView)findViewById(R.id.qr_timer_t);
+            ibtn = (ImageButton)findViewById(R.id.qr_time);
+            ibtn.setVisibility(View.INVISIBLE);
+            timev.setVisibility(View.VISIBLE);
+
+            thread2.interrupt();
+            thread4.interrupt();
+            thread = new ConnectThread();
+            thread.start();
+            thread2 = new TimerThread();
+            thread2.setDaemon(true);
+            thread2.start();
+
+
     }
 
     class onTimeThread extends Thread{

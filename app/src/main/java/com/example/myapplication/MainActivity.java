@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     String host = "223.194.158.91";    // 서버 컴퓨터 IP
     //String host = "121.161.183.214";
     int port = 5001;
-    //yyyyyyjjjjhhhhhjjjjj
     FirstConnectThread thread;
     Bundle bundle;
     Handler mHandler;
@@ -37,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
     SimpleDateFormat sdfNow;
     String formatDate;
     TextView dateNow;
-
     private SharedPreferences pref;
+    //※※※※※※ 신규, 기존 회원 구별
+    private SharedPreferences memberPref ;
+    int loginNum = 0;
+    //※※※※※※
     private TelephonyManager telephonyManager;
     private EditText Stuid;
 
@@ -47,14 +49,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if((ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) ){
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) || (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.INTERNET, Manifest.permission.ACCESS_NETWORK_STATE
-            },466);
+            }, 466);
         }
 
-        if((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)){
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE},466);
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 466);
         }
 
         now = System.currentTimeMillis();
@@ -67,13 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
         dateNow = (TextView) findViewById(R.id.qr_date);
 
-        pref = getSharedPreferences("pref" , MODE_PRIVATE);
+        pref = getSharedPreferences("pref", MODE_PRIVATE);
         final SharedPreferences.Editor editor = pref.edit();
 
-
-        Button btn = (Button)findViewById(R.id.login_btn);
+        Button btn = (Button) findViewById(R.id.login_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             String id = "허가";
+
             @Override
             public void onClick(View v) {
                 /*
@@ -107,19 +109,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        mHandler = new Handler(){
-            public void handleMessage(Message msg){
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 bundle = msg.getData();
 
                 String ss = bundle.getString("key");
 
-                Toast.makeText(getApplicationContext(), bundle.getString("key") , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), bundle.getString("key"), Toast.LENGTH_SHORT).show();
             }
         };
     }
 
-    class FirstConnectThread extends Thread{
+    class FirstConnectThread extends Thread {
         int port = 80;
         Object input;
         String output_id;
@@ -127,8 +129,10 @@ public class MainActivity extends AppCompatActivity {
         String output_num;
         SharedPreferences id_pref;
         SharedPreferences.Editor id_commit;
+
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
-        public void run(){
+        public void run() {
+
             //String host = "localhost";
             //String host = "223.194.158.91";
             //String host = "223.194.134.161";
@@ -138,24 +142,27 @@ public class MainActivity extends AppCompatActivity {
             String host = "113.198.84.55";
 
             //String host = "223.194.156.151";
-           // String host = "113.198.84.55";
+            // String host = "113.198.84.55";
 
             //int port = 5001;
             //String host = "172.30.1.53";
             //int port = 8080;
 
+            memberPref = getSharedPreferences("memberPref", MODE_PRIVATE);
+            final SharedPreferences.Editor memberEditor = memberPref.edit();
             try {
                 Socket socket = new Socket(host, port);
                 System.out.println("서버로 연결되었습니다. : " + host + ", " + port);
                 //Toast.makeText(MainActivity.this, "connect server : " + host + ", " + port , Toast.LENGTH_SHORT).show();
-                telephonyManager = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+                telephonyManager = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                 String output_num = telephonyManager.getLine1Number();
                 output_num = output_num.replace("+82", "0");
-                EditText id = (EditText)findViewById(R.id.login_id_et);
-                EditText password = (EditText)findViewById(R.id.login_pw_et);
+                EditText id = (EditText) findViewById(R.id.login_id_et);
+                EditText password = (EditText) findViewById(R.id.login_pw_et);
 
                 //String output = m_etSendData.getText().toString();
-                output_id = id.getText().toString();;
+                output_id = id.getText().toString();
+                ;
                 ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
                 outstream.writeObject(output_id);
                 outstream.flush();
@@ -184,8 +191,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 */
 
-                if(input.toString().equals("허가")){
-                    Intent intent = new Intent(getApplicationContext(), NewFirstView.class);
+                if (input.toString().equals("허가")) {
                     //intent.putExtra("pid", id.getText().toString());
                     String pid = id.getText().toString();
                     id_pref = getSharedPreferences("login", MODE_APPEND);
@@ -193,10 +199,22 @@ public class MainActivity extends AppCompatActivity {
                     id_commit.putString("id", pid);
                     id_commit.commit();
                     System.out.println(">>>>>>>>>>>>>>>> : " + id_pref.getString("id", ""));
-                    startActivity(intent);
-                }
 
-                else if(input.toString().equals("불허가")){
+                    //※※※※※※ 신규, 기존 회원 구별
+
+                    int loginNum2 = memberPref.getInt("loginNum", 0);
+                    Intent intent;
+
+                    loginNum += 1;
+                    if (loginNum2 < 2) {
+                        intent = new Intent(getApplicationContext(), NewFirstView.class);
+                    } else intent = new Intent(getApplicationContext(), OldFirstView.class);
+                    memberEditor.putInt("loginNum", loginNum);
+                    memberEditor.commit();
+                    //※※※※※※
+                    startActivity(intent);
+
+                } else if (input.toString().equals("불허가")) {
                     bundle = new Bundle();
                     bundle.putString("key", "ID와 PW를 다시 확인해주세요");
                     Message msg = new Message();
@@ -208,15 +226,13 @@ public class MainActivity extends AppCompatActivity {
                 outstream.close();
                 socket.close();
 
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("접근실패");
                 return;
             }
         }
     }
-
 
 
 }

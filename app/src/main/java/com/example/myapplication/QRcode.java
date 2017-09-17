@@ -295,7 +295,7 @@ public class QRcode extends FragmentActivity {
                 Message timermsg = new Message();
                 timermsg.setData(tbundle);
                 timerHandler.sendMessage(timermsg);
-                vibrator.vibrate(100);
+                vibrator.vibrate(10);
 
                 try{
                     Thread.sleep(998);

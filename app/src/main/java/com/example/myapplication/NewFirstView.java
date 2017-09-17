@@ -11,23 +11,25 @@ public class NewFirstView extends AppCompatActivity {
     private Button btn;
     private Button btn2;
     private Intent settingintent;
+    private RegisterDialog registerDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_first_view);
 
-
         btn = (Button) findViewById(R.id.nfv_register_btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent mainintent = getIntent();
-                //String pid = mainintent.getStringExtra("pid");
-                Intent intent = new Intent(getApplicationContext(), OldFirstView.class);
-                //intent.putExtra("pid", pid);
-                startActivity(intent);
+                onClickView(v);
             }
+            //Intent mainintent = getIntent();
+            //String pid = mainintent.getStringExtra("pid");
+            // Intent intent = new Intent(getApplicationContext(), OldFirstView.class);
+            //intent.putExtra("pid", pid);
+            //startActivity(intent);
+
         });
 
 
@@ -42,4 +44,36 @@ public class NewFirstView extends AppCompatActivity {
         });
 
     }
+
+    public void onClickView(View v) {
+        registerDialog = new RegisterDialog(this,
+                "등록하기", // 제목
+                "", // 내용
+                leftListener, // 왼쪽 버튼 이벤트
+                rightListener); // 오른쪽 버튼 이벤트
+        registerDialog.show();
+    }
+
+    private View.OnClickListener leftListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(),SetFPActivity.class);
+            startActivity(intent);
+            registerDialog.dismiss();
+            SetLockActivity.FPcheck =true;
+            SetLockActivity.PTcheck = false;
+        }
+    };
+
+    private View.OnClickListener rightListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(),SetPatternActivity.class);
+            startActivity(intent);
+            SetLockActivity.FPcheck =false;
+            SetLockActivity.PTcheck = true;
+            registerDialog.dismiss();
+        }
+    };
+
+
+
 }

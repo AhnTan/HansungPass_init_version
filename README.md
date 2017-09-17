@@ -97,3 +97,14 @@ v0.18, v0.25
 매니페스트 추가 : android.permission.READ_PHONE_STATE 추가
 
 형우 - 서버쪽에서 로그인한 사람의 학번과 이름값을 보내 QRcode 부분에서 나오게끔 함
+
+# 09-17
+v0.47
+기존회원, 신규회원 구분해서 Activity 띄우기
+2. 신규회원
+2-1. 로그인 후, new_first_view로 이동
+2-2. 등록하기 btn 클릭 시, 팝업 띄우기
+2-3. 지문등록하기 버튼 클릭 시, SetFPActivity로 이동
+2-4. 패턴등록하기 버튼 클릭 시, SetPatternActivity로 이동
+3. 기존회원
+3-1. 로그인 후, old_first_view로 이동

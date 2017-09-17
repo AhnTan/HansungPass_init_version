@@ -27,18 +27,17 @@ dependencies {
     repositories {
         maven { url "https://jitpack.io" }
     }
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     compile project(':library')
-    compile 'com.takisoft.fix:preference-v7:25.3.1.0'
 
     /*FingerPrint library*/
     // required: supports marshmallow devices
     // optional: support for pre-marshmallow Samsung devices
     // optional: the RxJava 1 interface
     // optional: the RxJava 2 interface
-    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile project(':library')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.takisoft.fix:preference-v7:25.3.1.0'
     compile 'com.google.zxing:core:2.0'
     compile 'com.github.ajalt.reprint:core:3.1.0@aar'
     compile 'com.github.ajalt.reprint:reprint_spass:3.1.0@aar'
@@ -46,5 +45,5 @@ dependencies {
     compile 'com.github.ajalt.reprint:rxjava2:3.1.0@aar'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    compile project(':library')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

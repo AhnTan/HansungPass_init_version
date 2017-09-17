@@ -336,7 +336,7 @@ public class QRcode extends FragmentActivity {
                 outstream.flush();
                 System.out.println("서버로 보낸 데이터 : " + output);
 
-                String output2 = ppid + "%3B%3B" + formatDate + "%3B%3B";
+                String output2 = ppid + "%3B%3B" + formatDate;
                 ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
                 outstream2.writeObject(output2);
                 outstream2.flush();

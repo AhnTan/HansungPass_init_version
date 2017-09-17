@@ -14,7 +14,6 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -50,15 +49,11 @@ public class QRcode extends FragmentActivity {
     private SimpleDateFormat sdfNow;
     private String formatDate;
     private String qr_id;
-    private String qr_date;
     private String md5;
     private TextView dateNow;
     private TextView dateNow_b;
     private TextView timev;
-    private String[] ReturnList;
     private ImageButton ibtn;
-    private String pid;
-    private Button btn2;
     private SharedPreferences se;
 
     @Override
@@ -72,9 +67,6 @@ public class QRcode extends FragmentActivity {
         //스샷막아주는 코드
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
 
-
-        Intent beforeintent = getIntent();
-        pid = beforeintent.getStringExtra("pid");
 
         thread = new ConnectThread();
         thread.start();
@@ -262,28 +254,15 @@ public class QRcode extends FragmentActivity {
         }
     }
 
-    /*
-    class pausetimer extends Thread{
-        public void run(){
-            try{
-                Thread.sleep(3000);
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-    }
-    */
 
     class TimerThread extends Thread{
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
-
-        // Button btn = (Button)findViewById(R.id.qr_time);
 
         public void run(){
             // 프로그래스바 (위와 동일)
 
             k=30;
+            //시간 지날때마다 진동
             final Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
 
             for(; k>=0; k--){
@@ -310,8 +289,6 @@ public class QRcode extends FragmentActivity {
             Message stopmsg = new Message();
             stopmsg.setData(stopbundle);
             stopHandler.sendMessage(stopmsg);
-
-            //ibtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -319,14 +296,8 @@ public class QRcode extends FragmentActivity {
     class ConnectThread extends Thread{
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
         public void run(){
-            //String host = "172.30.1.53";
             String host = "113.198.84.55";
-            //String host = "223.194.158.91";
-            //String host = "113.198.81.69";
-            //String host = "223.194.134.161";
             int port = 80;
-            //String host = "172.30.1.53";
-            //int port = 8080;
 
 
             try {
@@ -335,47 +306,33 @@ public class QRcode extends FragmentActivity {
 
                 se = getSharedPreferences("login", MODE_APPEND);
                 String ppid = se.getString("id", "");
-                //ma.id_pref =getSharedPreferences("login", MODE_APPEND);
-                // String ppid = ma.id_pref.getString("id", "");
-                //String ppid = se.getString("login", "");
-                //String output = m_etSendData.getText().toString();
-                //String output = pid;
-                //String output = pid + formatDate;
+
                 System.out.println(">>>>>>>>>>>>>>>> : " + ppid);
                 String output = ppid + "%3B%3B";
+
                 ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
                 outstream.writeObject(output);
                 outstream.flush();
                 System.out.println("서버로 보낸 데이터 : " + output);
 
                 String output2 = formatDate + "%3B%3B";
-                //String output2 = "send2";
                 ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
                 outstream2.writeObject(output2);
                 outstream2.flush();
                 System.out.println("서버로 보낸 데이터 : " + output2);
 
-                ObjectInputStream instream = new ObjectInputStream(socket.getInputStream());
-                //Bitmap bitmap = (Bitmap)instream.readObject();
-                Object input = instream.readObject();
-                //System.out.println(instream.readObject());
-                System.out.println("서버로부터 받은 QR데이터: " + input);
-                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
 
+                ObjectInputStream instream = new ObjectInputStream(socket.getInputStream());
+                Object input = instream.readObject();
+                System.out.println("서버로부터 받은 QR데이터: " + input);
 
                 ObjectInputStream instream2 = new ObjectInputStream(socket.getInputStream());
-                //Bitmap bitmap = (Bitmap)instream.readObject();
                 Object input2 = instream2.readObject();
-                //System.out.println(instream.readObject());
                 System.out.println("서버로부터 받은 학번 데이터: " + input2);
-                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
 
                 ObjectInputStream instream3 = new ObjectInputStream(socket.getInputStream());
-                //Bitmap bitmap = (Bitmap)instream.readObject();
                 Object input3 = instream3.readObject();
-                //System.out.println(instream.readObject());
                 System.out.println("서버로부터 받은 이름 데이터: " + input3);
-                //Toast.makeText(getApplicationContext(), "서버로부터 받은 데이터 : " + input , Toast.LENGTH_SHORT).show();
 
 
                 // 서버에서 받은 데이터(QR코드)를 번들을 통해 핸들러 메세지로 전달
@@ -404,9 +361,7 @@ public class QRcode extends FragmentActivity {
     public static Bitmap toBitmap(BitMatrix martrix){
         int height = martrix.getHeight();
         int width = martrix.getWidth();
-        //int height = 100;
-        //int width = 100;
-        //Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         for(int i = 0; i<width; i++){
             for(int j = 0; j<height; j++){

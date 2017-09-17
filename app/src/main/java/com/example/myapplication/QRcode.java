@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -56,6 +57,7 @@ public class QRcode extends FragmentActivity {
     private SharedPreferences se;
     int reset_btn_count;
     private BackPressCloseHandler backPressCloseHandler;
+    ActivityManager am;
 
 
     @Override
@@ -204,7 +206,10 @@ public class QRcode extends FragmentActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
+       backPressCloseHandler.onBackPressed();
+        /*
+        am = (ActivityManager)getSystemService(ACTIVITY_SERVICE);
+        am.restartPackage(getPackageName());*/
     }
 
 /*

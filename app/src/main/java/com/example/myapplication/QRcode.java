@@ -299,7 +299,6 @@ public class QRcode extends FragmentActivity {
             String host = "113.198.84.55";
             int port = 80;
 
-
             try {
                 Socket socket = new Socket(host, port);
                 System.out.println("서버로 연결되었습니다. : " + host + ", " + port);
@@ -308,14 +307,14 @@ public class QRcode extends FragmentActivity {
                 String ppid = se.getString("id", "");
 
                 System.out.println(">>>>>>>>>>>>>>>> : " + ppid);
-                String output = ppid + "%3B%3B";
+                String output = "send";
 
                 ObjectOutputStream outstream = new ObjectOutputStream(socket.getOutputStream());
                 outstream.writeObject(output);
                 outstream.flush();
                 System.out.println("서버로 보낸 데이터 : " + output);
 
-                String output2 = formatDate + "%3B%3B";
+                String output2 = ppid + "%3B%3B" + formatDate + "%3B%3B";
                 ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
                 outstream2.writeObject(output2);
                 outstream2.flush();
@@ -370,6 +369,4 @@ public class QRcode extends FragmentActivity {
         }
         return bmp;
     }
-
-
 }

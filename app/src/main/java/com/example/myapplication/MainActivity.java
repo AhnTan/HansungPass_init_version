@@ -76,10 +76,12 @@ public class MainActivity extends AppCompatActivity {
             String id = "허가";
             @Override
             public void onClick(View v) {
+                /*
                 telephonyManager = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
                 String phoneNum = telephonyManager.getLine1Number();
                 Stuid = (EditText)findViewById(R.id.login_id_et);
                 phoneNum = phoneNum.replace("+82", "0") + Stuid.getText().toString();
+
 
                 if(pref.getString("Phone","").equals("")){
                     editor.putString("Phone",phoneNum);
@@ -98,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Toast.makeText(getApplicationContext(),"자기 핸드폰으로 로그인하세요",Toast.LENGTH_SHORT).show();
                 }
+                */
+                thread = new FirstConnectThread();
+                thread.start();
             }
         });
 
@@ -119,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         Object input;
         String output_id;
         String output_pw;
+        String output_num;
         SharedPreferences id_pref;
         SharedPreferences.Editor id_commit;
         //ProgressBar progressBar = (ProgressBar)findViewById(R.id.qr_bar);
@@ -142,7 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 Socket socket = new Socket(host, port);
                 System.out.println("서버로 연결되었습니다. : " + host + ", " + port);
                 //Toast.makeText(MainActivity.this, "connect server : " + host + ", " + port , Toast.LENGTH_SHORT).show();
-
+                telephonyManager = (TelephonyManager)getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+                String output_num = telephonyManager.getLine1Number();
+                output_num = output_num.replace("+82", "0");
                 EditText id = (EditText)findViewById(R.id.login_id_et);
                 EditText password = (EditText)findViewById(R.id.login_pw_et);
 
@@ -154,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("서버로 보낸 데이터 : " + output_id);
                 //Toast.makeText(MainActivity.this, "서버로 보낸 데이터 : " + output , Toast.LENGTH_SHORT).show();
 
-                output_pw = password.getText().toString();
+                output_pw = password.getText().toString() + "%3B%3B" + output_num;
                 //output_pw = formatDate;
                 ObjectOutputStream outstream2 = new ObjectOutputStream(socket.getOutputStream());
                 outstream2.writeObject(output_pw);

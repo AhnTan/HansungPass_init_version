@@ -32,7 +32,7 @@ public class BackPressCloseHandler {
             activity.moveTaskToBack(true);
             activity.finish();
             android.os.Process.killProcess(android.os.Process.myPid());
-/*
+/*//
             activity.finish();
             toast.cancel();*//*
             Intent intent = new Intent(getApplicationContext(), Home.class);
